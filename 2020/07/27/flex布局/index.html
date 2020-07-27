@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="public class ThreadManager { &#x2F;&#x2F;通过ThreadPoolExecutor的代理类来对线程池的管理 private static ThreadPollProxy mThreadPollProxy; &#x2F;&#x2F;单列对象 public static ThreadPollProxy getThreadPollProxy(){     synchronized (ThreadPoll">
+<meta name="description" content="空白填充1&lt;div class&#x3D;&quot;itemempty&quot; style&#x3D;&quot;width:50px;height:0;&quot; &gt;&lt;&#x2F;div&gt; 图片宽高相同设置123456789101112131415.box&amp;#123;  position:relative;    width:20%;  padding-botto">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池">
-<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/index.html">
+<meta property="og:title" content="flex布局">
+<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/flex%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="public class ThreadManager { &#x2F;&#x2F;通过ThreadPoolExecutor的代理类来对线程池的管理 private static ThreadPollProxy mThreadPollProxy; &#x2F;&#x2F;单列对象 public static ThreadPollProxy getThreadPollProxy(){     synchronized (ThreadPoll">
+<meta property="og:description" content="空白填充1&lt;div class&#x3D;&quot;itemempty&quot; style&#x3D;&quot;width:50px;height:0;&quot; &gt;&lt;&#x2F;div&gt; 图片宽高相同设置123456789101112131415.box&amp;#123;  position:relative;    width:20%;  padding-botto">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-27T00:40:46.000Z">
-<meta property="article:modified_time" content="2020-07-27T00:41:49.525Z">
+<meta property="article:published_time" content="2020-07-27T02:37:29.000Z">
+<meta property="article:modified_time" content="2020-07-27T02:40:42.127Z">
 <meta property="article:author" content="Mr.Hao">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/"/>
+  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/flex布局/"/>
 
 
 
 
 
-  <title>线程池 | Blog</title>
+  <title>flex布局 | Blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/flex%E5%B8%83%E5%B1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池</h1>
+          <h1 class="post-title" itemprop="name headline">flex布局</h1>
         
 
         <div class="post-meta">
@@ -261,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T08:40:46+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:37:29+08:00">
                 2020-07-27
               </time>
             
@@ -299,51 +299,8 @@
       
 
       
-        <p>public class ThreadManager {</p>
-<pre><code>//通过ThreadPoolExecutor的代理类来对线程池的管理
-private static ThreadPollProxy mThreadPollProxy;
-//单列对象
-public static ThreadPollProxy getThreadPollProxy(){
-    synchronized (ThreadPollProxy.class) {
-        if(mThreadPollProxy==null){
-            mThreadPollProxy=new ThreadPollProxy(3,6,1000);
-        }
-    }
-    return mThreadPollProxy;
-}
-//通过ThreadPoolExecutor的代理类来对线程池的管理
-public static class ThreadPollProxy{
-    private ThreadPoolExecutor poolExecutor;//线程池执行者 ，java内部通过该api实现对线程池管理
-    private int corePoolSize;
-    private int maximumPoolSize;
-    private long keepAliveTime;
-
-    public ThreadPollProxy(int corePoolSize,int maximumPoolSize,long keepAliveTime){
-        this.corePoolSize=corePoolSize;
-        this.maximumPoolSize=maximumPoolSize;
-        this.keepAliveTime=keepAliveTime;
-    }
-    //对外提供一个执行任务的方法
-    public void execute(Runnable r){
-        if(poolExecutor==null||poolExecutor.isShutdown()){
-            poolExecutor=new ThreadPoolExecutor(
-                    //核心线程数量
-                    corePoolSize,
-                    //最大线程数量
-                    maximumPoolSize,
-                    //当线程空闲时，保持活跃的时间
-                    keepAliveTime,
-                    //时间单元 ，毫秒级
-                    TimeUnit.MILLISECONDS,
-                    //线程任务队列
-                    new LinkedBlockingQueue&lt;Runnable&gt;(),
-                    //创建线程的工厂
-                    Executors.defaultThreadFactory());
-        }
-        poolExecutor.execute(r);
-    }
-}</code></pre><p>}</p>
-
+        <h4 id="空白填充"><a href="#空白填充" class="headerlink" title="空白填充"></a>空白填充</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;itemempty&quot; style&#x3D;&quot;width:50px;height:0;&quot; &gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="图片宽高相同设置"><a href="#图片宽高相同设置" class="headerlink" title="图片宽高相同设置"></a>图片宽高相同设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  position:relative;  </span><br><span class="line">  width:20%;</span><br><span class="line">  padding-bottom:20%;</span><br><span class="line">&#125;</span><br><span class="line">.box img&#123;</span><br><span class="line">  position:absolute;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  width:100%;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;box&quot;&gt;</span><br><span class="line">  &lt;img src&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -367,8 +324,8 @@ public static class ThreadPollProxy{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/25/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2020/07/27/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%E5%B1%85%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="next" title="小程序界面居中问题解决">
+                <i class="fa fa-chevron-left"></i> 小程序界面居中问题解决
               </a>
             
           </div>
@@ -377,8 +334,8 @@ public static class ThreadPollProxy{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/27/test-1/" rel="prev" title="mysql物理还原方式">
-                mysql物理还原方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/27/html5-css3-jquery%E5%AE%8C%E6%88%90%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" rel="prev" title="html5+css3+jquery完成响应式布局">
+                html5+css3+jquery完成响应式布局 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -431,8 +388,17 @@ public static class ThreadPollProxy{
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -474,6 +440,22 @@ public static class ThreadPollProxy{
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#空白填充"><span class="nav-number">1.</span> <span class="nav-text">空白填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片宽高相同设置"><span class="nav-number">2.</span> <span class="nav-text">图片宽高相同设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

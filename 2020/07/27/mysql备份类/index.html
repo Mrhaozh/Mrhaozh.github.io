@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="public class ThreadManager { &#x2F;&#x2F;通过ThreadPoolExecutor的代理类来对线程池的管理 private static ThreadPollProxy mThreadPollProxy; &#x2F;&#x2F;单列对象 public static ThreadPollProxy getThreadPollProxy(){     synchronized (ThreadPoll">
+<meta name="description" content="123456789101112131415161718public ResponseEntity databack()&amp;#123;        Date date&#x3D;new Date();        SimpleDateFormat sdf &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);        String name&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池">
-<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/index.html">
+<meta property="og:title" content="mysql备份类">
+<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%A4%87%E4%BB%BD%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="public class ThreadManager { &#x2F;&#x2F;通过ThreadPoolExecutor的代理类来对线程池的管理 private static ThreadPollProxy mThreadPollProxy; &#x2F;&#x2F;单列对象 public static ThreadPollProxy getThreadPollProxy(){     synchronized (ThreadPoll">
+<meta property="og:description" content="123456789101112131415161718public ResponseEntity databack()&amp;#123;        Date date&#x3D;new Date();        SimpleDateFormat sdf &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);        String name&amp;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-27T00:40:46.000Z">
-<meta property="article:modified_time" content="2020-07-27T00:41:49.525Z">
+<meta property="article:published_time" content="2020-07-27T02:34:55.000Z">
+<meta property="article:modified_time" content="2020-07-27T02:35:48.610Z">
 <meta property="article:author" content="Mr.Hao">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/"/>
+  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql备份类/"/>
 
 
 
 
 
-  <title>线程池 | Blog</title>
+  <title>mysql备份类 | Blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%A4%87%E4%BB%BD%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线程池</h1>
+          <h1 class="post-title" itemprop="name headline">mysql备份类</h1>
         
 
         <div class="post-meta">
@@ -261,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T08:40:46+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:34:55+08:00">
                 2020-07-27
               </time>
             
@@ -299,51 +299,7 @@
       
 
       
-        <p>public class ThreadManager {</p>
-<pre><code>//通过ThreadPoolExecutor的代理类来对线程池的管理
-private static ThreadPollProxy mThreadPollProxy;
-//单列对象
-public static ThreadPollProxy getThreadPollProxy(){
-    synchronized (ThreadPollProxy.class) {
-        if(mThreadPollProxy==null){
-            mThreadPollProxy=new ThreadPollProxy(3,6,1000);
-        }
-    }
-    return mThreadPollProxy;
-}
-//通过ThreadPoolExecutor的代理类来对线程池的管理
-public static class ThreadPollProxy{
-    private ThreadPoolExecutor poolExecutor;//线程池执行者 ，java内部通过该api实现对线程池管理
-    private int corePoolSize;
-    private int maximumPoolSize;
-    private long keepAliveTime;
-
-    public ThreadPollProxy(int corePoolSize,int maximumPoolSize,long keepAliveTime){
-        this.corePoolSize=corePoolSize;
-        this.maximumPoolSize=maximumPoolSize;
-        this.keepAliveTime=keepAliveTime;
-    }
-    //对外提供一个执行任务的方法
-    public void execute(Runnable r){
-        if(poolExecutor==null||poolExecutor.isShutdown()){
-            poolExecutor=new ThreadPoolExecutor(
-                    //核心线程数量
-                    corePoolSize,
-                    //最大线程数量
-                    maximumPoolSize,
-                    //当线程空闲时，保持活跃的时间
-                    keepAliveTime,
-                    //时间单元 ，毫秒级
-                    TimeUnit.MILLISECONDS,
-                    //线程任务队列
-                    new LinkedBlockingQueue&lt;Runnable&gt;(),
-                    //创建线程的工厂
-                    Executors.defaultThreadFactory());
-        }
-        poolExecutor.execute(r);
-    }
-}</code></pre><p>}</p>
-
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public ResponseEntity databack()&#123;</span><br><span class="line">        Date date&#x3D;new Date();</span><br><span class="line">        SimpleDateFormat sdf &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        String name&#x3D;sdf.format(date);</span><br><span class="line">        try &#123;</span><br><span class="line">            Runtime rt &#x3D; Runtime.getRuntime();</span><br><span class="line">            &#x2F;&#x2F;String cmd &#x3D;&quot;mysqldump -h localhost -uroot -proot dsyc_gym &gt; e:&#x2F;mysql.sql&quot;; &#x2F;&#x2F;一定要加 -h localhost(或是服务器IP地址)</span><br><span class="line">            String cmd &#x3D;&quot;mysqldump -h 127.0.0.1 -uroot -proot dsyc_gym &gt; &#x2F;Users&#x2F;haozhihui&#x2F;Documents&#x2F;mysqlbackup&#x2F;name.sql&quot;;</span><br><span class="line">            &#x2F;&#x2F;rt.exec(&quot;cmd &#x2F;c &quot; + cmd);</span><br><span class="line">            rt.exec( new String[] &#123; &quot;sh&quot;, &quot;-c&quot;, cmd &#125;);</span><br><span class="line">            LOGGER.info(String.valueOf(rt.exec(&quot;javac&quot;)));</span><br><span class="line">            return ResponseEntity.success(&quot;备份成功&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return ResponseEntity.failure(&quot;备份失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -367,8 +323,8 @@ public static class ThreadPollProxy{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/25/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2020/07/27/mysql%E7%9B%B8%E5%85%B3/" rel="next" title="解决mysql server has gone away">
+                <i class="fa fa-chevron-left"></i> 解决mysql server has gone away
               </a>
             
           </div>
@@ -377,8 +333,8 @@ public static class ThreadPollProxy{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/27/test-1/" rel="prev" title="mysql物理还原方式">
-                mysql物理还原方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/27/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%E5%B1%85%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" rel="prev" title="小程序界面居中问题解决">
+                小程序界面居中问题解决 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

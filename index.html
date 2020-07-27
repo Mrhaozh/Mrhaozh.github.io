@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/Spring%E6%95%B4%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%9A-idea-SpringBoot-Mybatis-Thymeleaf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/27/test/" itemprop="url">线程池</a></h1>
+                <a class="post-title-link" href="/2020/07/27/Spring%E6%95%B4%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%9A-idea-SpringBoot-Mybatis-Thymeleaf/" itemprop="url"> Spring整合系列： idea SpringBoot+Mybatis+Thymeleaf</a></h1>
         
 
         <div class="post-meta">
@@ -260,7 +260,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T08:40:46+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T14:38:33+08:00">
                 2020-07-27
               </time>
             
@@ -300,50 +300,60 @@
       
         
           
-            <p>public class ThreadManager {</p>
-<pre><code>//通过ThreadPoolExecutor的代理类来对线程池的管理
-private static ThreadPollProxy mThreadPollProxy;
-//单列对象
-public static ThreadPollProxy getThreadPollProxy(){
-    synchronized (ThreadPollProxy.class) {
-        if(mThreadPollProxy==null){
-            mThreadPollProxy=new ThreadPollProxy(3,6,1000);
-        }
-    }
-    return mThreadPollProxy;
-}
-//通过ThreadPoolExecutor的代理类来对线程池的管理
-public static class ThreadPollProxy{
-    private ThreadPoolExecutor poolExecutor;//线程池执行者 ，java内部通过该api实现对线程池管理
-    private int corePoolSize;
-    private int maximumPoolSize;
-    private long keepAliveTime;
+            <p>最近有個師弟在問我關於SSM整合的問題，我也閒來無事搞了一個基礎架構起來，給他們做模板使用。</p>
+<p>所需的框架：</p>
+<pre><code>主要框架：Spring5、SpringMVC、Mybatis
+輔助框架：mysql驅動、Druid數據連接池、Junit4、Spring-test、Json（阿里）、Lombok、Log4j</code></pre><p>開發的平台：IDEA 2018.3.2、tomcat9<br>開始構建項目：<br>1.第一步：<br>————————————————<br>版权声明：本文为CSDN博主「Joshua丶Zheng」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/josh_zhen/java/article/details/89927009" target="_blank" rel="noopener">https://blog.csdn.net/josh_zhen/java/article/details/89927009</a></p>
+<p><img src="/images/pasted-4.png" alt="upload successful"><br> 使用模板構建Maven項目，選擇org.apache.maven開頭的。</p>
+<p><img src="/images/pasted-5.png" alt="upload successful"><br> 編寫GroupId與ArtifactId</p>
+<p><img src="/images/pasted-6.png" alt="upload successful"><br> 選擇Maven版本</p>
+<p><img src="/images/pasted-7.png" alt="upload successful"><br>然後繼續點擊Next，再點擊Finish即可；<br>進來項目以後，點擊Enable Auto-Import，稍等一會兒。項目文件就會加載完成。</p>
+<p><img src="/images/pasted-8.png" alt="upload successful"><br> 生成後點擊右上角的文件項目文件管理器，手動創建文件。</p>
+<p><img src="/images/pasted-9.png" alt="upload successful"><br>之後在pom.xml文件裡開始添加框架<br>PS:搜索框架用的Maven存儲庫。<a href="https://mvnrepository.com/" target="_blank" rel="noopener">https://mvnrepository.com/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;project xmlns&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0&quot; xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">  xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;maven.apache.org&#x2F;POM&#x2F;4.0.0 http:&#x2F;&#x2F;maven.apache.org&#x2F;xsd&#x2F;maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;&#x2F;modelVersion&gt;</span><br><span class="line"></span><br><span class="line">  &lt;groupId&gt;com.moonlit&lt;&#x2F;groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;TestSSM&lt;&#x2F;artifactId&gt;</span><br><span class="line">  &lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">  &lt;packaging&gt;war&lt;&#x2F;packaging&gt;</span><br><span class="line"></span><br><span class="line">  &lt;name&gt;TestSSM Maven Webapp&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;!-- FIXME change it to the project&#39;s website --&gt;</span><br><span class="line">  &lt;url&gt;http:&#x2F;&#x2F;www.example.com&lt;&#x2F;url&gt;</span><br><span class="line"></span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;project.build.sourceEncoding&gt;UTF-8&lt;&#x2F;project.build.sourceEncoding&gt;</span><br><span class="line">    &lt;maven.compiler.source&gt;1.7&lt;&#x2F;maven.compiler.source&gt;</span><br><span class="line">    &lt;maven.compiler.target&gt;1.7&lt;&#x2F;maven.compiler.target&gt;</span><br><span class="line">  &lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;!-- Spring --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.6.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-orm&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.6.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;!-- spring-test --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-test&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.6.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Spring-mvc --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-webmvc&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.6.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- mybatis --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mybatis&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.5.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mybatis-spring&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;2.0.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- mysql --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;8.0.16&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;!-- Druid --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;druid&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.1.16&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Json --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.2.58&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- lombok --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;lombok&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.18.6&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.projectlombok&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;lombok-maven&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.18.6.0&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;type&gt;pom&lt;&#x2F;type&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 日志 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.slf4j&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;slf4j-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.7.21&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.slf4j&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;slf4j-log4j12&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;1.7.21&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Junit4 --&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;4.12&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;junit&lt;&#x2F;groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;junit&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;4.12&lt;&#x2F;version&gt;</span><br><span class="line">          &lt;scope&gt;compile&lt;&#x2F;scope&gt;</span><br><span class="line">      &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;spring-test&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;5.1.6.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;scope&gt;compile&lt;&#x2F;scope&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line">  &lt;build&gt;</span><br><span class="line">    &lt;finalName&gt;TestSSM&lt;&#x2F;finalName&gt;</span><br><span class="line">    &lt;pluginManagement&gt;&lt;!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) --&gt;</span><br><span class="line">      &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-clean-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.1.0&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;!-- see http:&#x2F;&#x2F;maven.apache.org&#x2F;ref&#x2F;current&#x2F;maven-core&#x2F;default-bindings.html#Plugin_bindings_for_war_packaging --&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-resources-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.0.2&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-compiler-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.8.0&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-surefire-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;2.22.1&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-war-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.2.2&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-install-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;2.5.2&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">          &lt;artifactId&gt;maven-deploy-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;2.8.2&lt;&#x2F;version&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">      &lt;&#x2F;plugins&gt;</span><br><span class="line">    &lt;&#x2F;pluginManagement&gt;</span><br><span class="line">  &lt;&#x2F;build&gt;</span><br><span class="line">&lt;&#x2F;project&gt;</span><br></pre></td></tr></table></figure>
+<p>順便吐槽下，很多新手在添加Spring的jar包時添加一大堆，實際上Spring-web這個包已經幫我們整合很多需要使用到的jar包，包括以下這些</p>
+<p><img src="/images/pasted-10.png" alt="upload successful"><br>項目文件</p>
+<p><img src="/images/pasted-11.png" alt="upload successful"></p>
+<p>開始添加Spring的配置文件，applicationContext</p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
+<p><img src="/images/pasted-13.png" alt="upload successful"><br> 上代碼<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;</span><br><span class="line">       xmlns:tx&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&quot;</span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span><br><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd</span><br><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context</span><br><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd</span><br><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx</span><br><span class="line">       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;tx&#x2F;spring-tx.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 包掃描 --&gt;</span><br><span class="line">    &lt;context:component-scan base-package&#x3D;&quot;com.moonlit.demo&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 加載數據庫配置文件 --&gt;</span><br><span class="line">    &lt;context:property-placeholder location&#x3D;&quot;classpath:&#x2F;db.properties&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 創建連接池 --&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;dataSource&quot; class&#x3D;&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method&#x3D;&quot;close&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;driverClassName&quot; value&#x3D;&quot;$&#123;jdbc.driver&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;url&quot; value&#x3D;&quot;$&#123;jdbc.url&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;username&quot; value&#x3D;&quot;$&#123;jdbc.username&#125;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;password&quot; value&#x3D;&quot;$&#123;jdbc.password&#125;&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 配置SessionFactory --&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;sqlSessionFactory&quot; class&#x3D;&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span><br><span class="line">        &lt;!-- 读取MyBatis总配置文件 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;configLocation&quot; value&#x3D;&quot;classpath:&#x2F;mybatis.xml&quot;&#x2F;&gt;</span><br><span class="line">        &lt;!-- 配置别名扫描 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;typeAliasesPackage&quot; value&#x3D;&quot;com.moonlit.demo.entity&quot;&#x2F;&gt;</span><br><span class="line">        &lt;!-- 自动扫描mapper.xml文件 --&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;mapperLocations&quot; value&#x3D;&quot;classpath:&#x2F;mapper&#x2F;*Mapper.xml&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 配置事务 --&gt;</span><br><span class="line">    &lt;bean id&#x3D;&quot;transactionManager&quot; class&#x3D;&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;dataSource&quot; ref&#x3D;&quot;dataSource&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;tx:annotation-driven&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--Mapper接口代理扫描器--&gt;</span><br><span class="line">    &lt;bean class&#x3D;&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;sqlSessionFactoryBeanName&quot; value&#x3D;&quot;sqlSessionFactory&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;basePackage&quot; value&#x3D;&quot;com.moonlit.demo.dao&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure><br> 配置spring-mvc.xml文件<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;</span><br><span class="line">       xmlns:mvc&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&quot;</span><br><span class="line">       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">       xsi:schemaLocation&#x3D;&quot;</span><br><span class="line">        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans</span><br><span class="line">        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd</span><br><span class="line">        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc</span><br><span class="line">        http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;mvc&#x2F;spring-mvc.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 包含Spring的核心配置 --&gt;</span><br><span class="line">    &lt;import resource&#x3D;&quot;classpath:spring&#x2F;applicationContext.xml&quot;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--MVC的注解解析器 --&gt;</span><br><span class="line">    &lt;mvc:annotation-driven&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 静态资源处理器 --&gt;</span><br><span class="line">    &lt;mvc:default-servlet-handler&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id&#x3D;&quot;viewResolver&quot; class&#x3D;&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;prefix&quot; value&#x3D;&quot;&#x2F;WEB-INF&#x2F;user&#x2F;&quot;&#x2F;&gt;</span><br><span class="line">        &lt;property name&#x3D;&quot;suffix&quot; value&#x3D;&quot;.jsp&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;bean&gt;</span><br><span class="line">&lt;&#x2F;beans&gt;</span><br></pre></td></tr></table></figure><br> 當配置完上面這兩個文件之後</p>
+<p><img src="/images/pasted-14.png" alt="upload successful"></p>
+<p><img src="/images/pasted-15.png" alt="upload successful"><br> 完成後，上面的提示就會消失</p>
+<p><img src="/images/pasted-16.png" alt="upload successful"><br> 配置mybatis.xml文件 （不需要可以不配置）<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">       PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot;</span><br><span class="line">       &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">   &lt;!-- 可以不配置 --&gt;</span><br><span class="line">   &lt;settings&gt;</span><br><span class="line">       &lt;!-- 配置允許懶加載 --&gt;</span><br><span class="line">       &lt;setting name&#x3D;&quot;lazyLoadingEnabled&quot; value&#x3D;&quot;true&quot;&#x2F;&gt;</span><br><span class="line">       &lt;!-- 取消關聯查詢 --&gt;</span><br><span class="line">       &lt;setting name&#x3D;&quot;aggressiveLazyLoading&quot; value&#x3D;&quot;false&quot;&#x2F;&gt;</span><br><span class="line">       &lt;!-- 哪些方法會觸發關係查詢 --&gt;</span><br><span class="line">       &lt;setting name&#x3D;&quot;lazyLoadTriggerMethods&quot; value&#x3D;&quot;clone&quot;&#x2F;&gt;</span><br><span class="line">   &lt;&#x2F;settings&gt;</span><br><span class="line">   &lt;!-- 配置别名 --&gt;</span><br><span class="line">   &lt;typeAliases&gt;</span><br><span class="line">       &lt;typeAlias type&#x3D;&quot;com.moonlit.demo.entity.User&quot; alias&#x3D;&quot;User&quot;&gt;&lt;&#x2F;typeAlias&gt;</span><br><span class="line">   &lt;&#x2F;typeAliases&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure><br>配置數據庫文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver &#x3D; com.mysql.cj.jdbc.Driver</span><br><span class="line">#testssm是數據庫名，後面的那一段是字符編碼跟時區</span><br><span class="line">jdbc.url &#x3D; jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;testssm?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8&amp;useSSL&#x3D;false&amp;serverTimezone&#x3D;GMT%2B8</span><br><span class="line">jdbc.username &#x3D; root</span><br><span class="line">jdbc.password &#x3D; qwe123</span><br></pre></td></tr></table></figure>
+<p>配置log4j</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Global logging configuration</span><br><span class="line">log4j.rootLogger&#x3D;ERROR, stdout</span><br><span class="line"># MyBatis logging configuration...</span><br><span class="line">log4j.logger.cn.wolfcode.ssm.mapper&#x3D;TRACE</span><br><span class="line"># Console output...</span><br><span class="line">log4j.appender.stdout&#x3D;org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout&#x3D;org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern&#x3D;%5p [%t] - %m%n</span><br></pre></td></tr></table></figure>
+<p>編寫entity （PS：因為使用lombok框架的原因，所以不需要編寫Get、Set、ToString方法，只需要添加@Data註解即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.moonlit.demo.entity;</span><br><span class="line"></span><br><span class="line">import lombok.Data;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> 1. @Author: Joshua_Zheng</span><br><span class="line"> 2. @Date: 2019&#x2F;5&#x2F;7 17:37</span><br><span class="line"> 3. @Email: by.Moonlit@gmail.com</span><br><span class="line"> 4. @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Data</span><br><span class="line">@Repository</span><br><span class="line">public class User &#123;</span><br><span class="line">    private Integer id;</span><br><span class="line">    private String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    public ThreadPollProxy(int corePoolSize,int maximumPoolSize,long keepAliveTime){
-        this.corePoolSize=corePoolSize;
-        this.maximumPoolSize=maximumPoolSize;
-        this.keepAliveTime=keepAliveTime;
-    }
-    //对外提供一个执行任务的方法
-    public void execute(Runnable r){
-        if(poolExecutor==null||poolExecutor.isShutdown()){
-            poolExecutor=new ThreadPoolExecutor(
-                    //核心线程数量
-                    corePoolSize,
-                    //最大线程数量
-                    maximumPoolSize,
-                    //当线程空闲时，保持活跃的时间
-                    keepAliveTime,
-                    //时间单元 ，毫秒级
-                    TimeUnit.MILLISECONDS,
-                    //线程任务队列
-                    new LinkedBlockingQueue&lt;Runnable&gt;(),
-                    //创建线程的工厂
-                    Executors.defaultThreadFactory());
-        }
-        poolExecutor.execute(r);
-    }
-}</code></pre><p>}</p>
+<p>編寫UserService與UserServiceImpl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.moonlit.demo.service;</span><br><span class="line"></span><br><span class="line">import com.moonlit.demo.entity.User;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @Author: Joshua_Zheng</span><br><span class="line"> * @Date: 2019&#x2F;5&#x2F;7 17:39</span><br><span class="line"> * @Email: by.Moonlit@gmail.com</span><br><span class="line"> * @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">public interface UserService &#123;</span><br><span class="line">    List&lt;User&gt; listUsers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Ps：快速創建接口實現類</p>
+<p><img src="/images/pasted-17.png" alt="upload successful"></p>
+<p><img src="/images/pasted-18.png" alt="upload successful"><br> Idea會自動創建，UserServiceImpl<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> package com.moonlit.demo.service.impl;</span><br><span class="line"></span><br><span class="line">import com.moonlit.demo.dao.UserDaoMapper;</span><br><span class="line">import com.moonlit.demo.entity.User;</span><br><span class="line">import com.moonlit.demo.service.UserService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> 1. @Author: Joshua_Zheng</span><br><span class="line"> 2. @Date: 2019&#x2F;5&#x2F;7 17:39</span><br><span class="line"> 3. @Email: by.Moonlit@gmail.com</span><br><span class="line"> 4. @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Service</span><br><span class="line">public class UserServiceImpl implements UserService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserDaoMapper mapper;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;User&gt; listUsers() &#123;</span><br><span class="line">        return mapper.listUsers();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>創建Dao層 UserDaoMapper.java跟UserDaoMapper.xml（兩個文件不在同一包下）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.moonlit.demo.dao;</span><br><span class="line"></span><br><span class="line">import com.moonlit.demo.entity.User;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> 1. @Author: Joshua_Zheng</span><br><span class="line"> 2. @Date: 2019&#x2F;5&#x2F;7 17:40</span><br><span class="line"> 3. @Email: by.Moonlit@gmail.com</span><br><span class="line"> 4. @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Repository</span><br><span class="line">public interface UserDaoMapper &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 查詢所有用戶</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    List&lt;User&gt; listUsers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Mapper 3.0&#x2F;&#x2F;EN&quot;</span><br><span class="line">        &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace&#x3D;&quot;com.moonlit.demo.dao.UserDaoMapper&quot;&gt;</span><br><span class="line">    &lt;!-- 结果集映射处理--&gt;</span><br><span class="line">    &lt;resultMap id&#x3D;&quot;User&quot; type&#x3D;&quot;User&quot;&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;id&quot; property&#x3D;&quot;id&quot;&#x2F;&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;name&quot; property&#x3D;&quot;name&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;resultMap&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id&#x3D;&quot;listUsers&quot; resultMap&#x3D;&quot;User&quot;&gt;</span><br><span class="line">      select id,name from user;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line">&lt;&#x2F;mapper&gt;</span><br></pre></td></tr></table></figure>
+<p>創建測試類</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import com.moonlit.demo.entity.User;</span><br><span class="line">import com.moonlit.demo.service.UserService;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import org.junit.runner.RunWith;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.test.context.ContextConfiguration;</span><br><span class="line">import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @Author: Joshua_Zheng</span><br><span class="line"> * @Date: 2019&#x2F;5&#x2F;7 17:42</span><br><span class="line"> * @Email: by.Moonlit@gmail.com</span><br><span class="line"> * @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RunWith(SpringJUnit4ClassRunner.class)</span><br><span class="line">@ContextConfiguration(value &#x3D; &quot;classpath:spring&#x2F;applicationContext.xml&quot;)</span><br><span class="line">public class App &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserService userService;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testList()&#123;</span><br><span class="line">        List&lt;User&gt; users &#x3D; userService.listUsers();</span><br><span class="line">        for (User user : users) &#123;</span><br><span class="line">            System.out.println(&quot;user &#x3D; &quot; + user);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>數據庫中的字段</p>
+<p><img src="/images/pasted-19.png" alt="upload successful"><br>Ps:這裡使用了junit，使用junit需要在idea中安裝插件</p>
+<p><img src="/images/pasted-20.png" alt="upload successful"><br>當可以看到輸出結果時就說明你的框架整合完成了，並且可以獲取數據庫中的信息。</p>
+<p>編寫Controller層 UserController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">package com.moonlit.demo.controller;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.moonlit.demo.service.UserService;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> 1. @Author: Joshua_Zheng</span><br><span class="line"> 2. @Date: 2019&#x2F;5&#x2F;7 17:44</span><br><span class="line"> 3. @Email: by.Moonlit@gmail.com</span><br><span class="line"> 4. @Version 1.0</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Controller</span><br><span class="line">public class UserController &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private UserService userService;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 顯示所有用戶信息</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @RequestMapping(&quot;&#x2F;user&quot;)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public String listUsers()&#123;</span><br><span class="line">        String users &#x3D; JSON.toJSONString(userService.listUsers());</span><br><span class="line">        return users;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置web.xml文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;</span><br><span class="line">        xmlns&#x3D;&quot;http:&#x2F;&#x2F;java.sun.com&#x2F;xml&#x2F;ns&#x2F;javaee&quot;</span><br><span class="line">        xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;java.sun.com&#x2F;xml&#x2F;ns&#x2F;javaee</span><br><span class="line">        http:&#x2F;&#x2F;java.sun.com&#x2F;xml&#x2F;ns&#x2F;javaee&#x2F;web-app_3_0.xsd&quot;</span><br><span class="line">        id&#x3D;&quot;WebApp_ID&quot; version&#x3D;&quot;3.0&quot;&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 配置Spring的核心監聽器 --&gt;</span><br><span class="line"> &lt;listener&gt;</span><br><span class="line">   &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;&#x2F;listener-class&gt;</span><br><span class="line"> &lt;&#x2F;listener&gt;</span><br><span class="line"> &lt;context-param&gt;</span><br><span class="line">   &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;</span><br><span class="line">   &lt;param-value&gt;classpath:spring&#x2F;applicationContext.xml&lt;&#x2F;param-value&gt;</span><br><span class="line"> &lt;&#x2F;context-param&gt;</span><br><span class="line"></span><br><span class="line"> &lt;!-- 字符編碼 --&gt;</span><br><span class="line"> &lt;filter&gt;</span><br><span class="line">   &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;</span><br><span class="line">   &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;&#x2F;filter-class&gt;</span><br><span class="line">   &lt;init-param&gt;</span><br><span class="line">     &lt;param-name&gt;encoding&lt;&#x2F;param-name&gt;</span><br><span class="line">     &lt;param-value&gt;UTF-8&lt;&#x2F;param-value&gt;</span><br><span class="line">   &lt;&#x2F;init-param&gt;</span><br><span class="line"> &lt;&#x2F;filter&gt;</span><br><span class="line"> &lt;filter-mapping&gt;</span><br><span class="line">   &lt;filter-name&gt;encodingFilter&lt;&#x2F;filter-name&gt;</span><br><span class="line">   &lt;url-pattern&gt;&#x2F;*&lt;&#x2F;url-pattern&gt;</span><br><span class="line"> &lt;&#x2F;filter-mapping&gt;</span><br><span class="line"></span><br><span class="line"> &lt;servlet&gt;</span><br><span class="line">   &lt;servlet-name&gt;SpringMVC&lt;&#x2F;servlet-name&gt;</span><br><span class="line">   &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;&#x2F;servlet-class&gt;</span><br><span class="line">   &lt;init-param&gt;</span><br><span class="line">     &lt;param-name&gt;contextConfigLocation&lt;&#x2F;param-name&gt;</span><br><span class="line">     &lt;param-value&gt;classpath:spring&#x2F;spring-mvc.xml&lt;&#x2F;param-value&gt;</span><br><span class="line">   &lt;&#x2F;init-param&gt;</span><br><span class="line">   &lt;load-on-startup&gt;1&lt;&#x2F;load-on-startup&gt;</span><br><span class="line"> &lt;&#x2F;servlet&gt;</span><br><span class="line"> &lt;servlet-mapping&gt;</span><br><span class="line">   &lt;servlet-name&gt;SpringMVC&lt;&#x2F;servlet-name&gt;</span><br><span class="line">   &lt;url-pattern&gt;&#x2F;&lt;&#x2F;url-pattern&gt;</span><br><span class="line"> &lt;&#x2F;servlet-mapping&gt;</span><br><span class="line">&lt;&#x2F;web-app&gt;</span><br></pre></td></tr></table></figure>
+<p>添加Tomcat</p>
+<p><img src="/images/pasted-21.png" alt="upload successful"></p>
+<p><img src="/images/pasted-22.png" alt="upload successful"><br>-Dfile.encoding=UTF-8</p>
+<p><img src="/images/pasted-23.png" alt="upload successful"></p>
+<p>將項目放進Tomcat裡</p>
+<p><img src="/images/pasted-24.png" alt="upload successful"></p>
+<p><img src="/images/pasted-25.png" alt="upload successful"></p>
+<p><img src="/images/pasted-26.png" alt="upload successful"><br> 回到Server選項菜單，開啟熱部署，然後點擊Ok</p>
+<p><img src="/images/pasted-27.png" alt="upload successful"><br> 啟動項目</p>
+<p><img src="/images/pasted-28.png" alt="upload successful"><br>發送請求<br><a href="http://localhost:8080/SSMDome/user" target="_blank" rel="noopener">http://localhost:8080/SSMDome/user</a></p>
+<p><img src="/images/pasted-29.png" alt="upload successful"></p>
 
           
         
@@ -392,7 +402,7 @@ public static class ThreadPollProxy{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/25/test-1/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%88%86%E9%85%8D%E7%94%A8%E6%88%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -411,7 +421,7 @@ public static class ThreadPollProxy{
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/25/test-1/" itemprop="url">maven打包本地jar包</a></h1>
+                <a class="post-title-link" href="/2020/07/27/mysql%E5%88%86%E9%85%8D%E7%94%A8%E6%88%B7/" itemprop="url">mysql分配用户</a></h1>
         
 
         <div class="post-meta">
@@ -423,8 +433,8 @@ public static class ThreadPollProxy{
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-25T16:19:00+08:00">
-                2020-07-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:56:35+08:00">
+                2020-07-27
               </time>
             
 
@@ -463,27 +473,34 @@ public static class ThreadPollProxy{
       
         
           
-            <pre><code>&lt;dependency&gt;
-        &lt;groupId&gt;com.ctg.ag&lt;/groupId&gt;
-        &lt;artifactId&gt;ag-sdk-biz-34275.tar.gz&lt;/artifactId&gt;
-        &lt;version&gt;20200628.162751-SNAPSHOT&lt;/version&gt;
-        &lt;scope&gt;system&lt;/scope&gt;                             
-        &lt;systemPath&gt;${project.basedir}/src/main/resources/lib/ag-sdk-biz-34275.tar.gz-20200628.162751-SNAPSHOT.jar&lt;/systemPath&gt;
-&lt;/dependency&gt;
+            <p>给主机为localhost的用户normal分配可对数据库test的所有表进行所有操作的权限，并设定口令为123。</p>
+<pre><code>mysql&gt;grant all privileges on test.* to joe@192.168.10.1 identified by &apos;123&apos;;
 
-    &lt;dependency&gt;
-            &lt;groupId&gt;org.apache.httpcomponents&lt;/groupId&gt;
-            &lt;artifactId&gt;httpclient&lt;/artifactId&gt;
-            &lt;version&gt;4.5.5&lt;/version&gt;
-        &lt;/dependency&gt;
+说明：给主机为192.168.10.1的用户john分配可对数据库test所有表进行所有操作的权限，并设定口令为123。
 
-  &lt;plugin&gt;
-            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-            &lt;configuration&gt;
-                &lt;includeSystemScope&gt;true&lt;/includeSystemScope&gt;
-            &lt;/configuration&gt;
-&lt;/plugin&gt;</code></pre>
+mysql&gt;grant all privileges on *.* to john@192.168.10.1 identified by &apos;123&apos;;
+
+说明：给主机为192.168.10.1的用户john分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
+
+mysql&gt;grant all privileges on *.* to john@localhost identified by &apos;123&apos;;
+
+说明：用户john分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
+
+查看权限：
+
+show grants for你的用户;
+
+show grants forroot@&apos;localhost&apos;;
+
+show grants for webgametest@10.3.18.158;
+
+show createdatabase dbname; 
+
+这个可以看到创建数据库时用到的一些参数。
+
+showcreatetabletickets;   
+
+可以看到创建表时用到的一些参数</code></pre>
           
         
       
@@ -531,7 +548,7 @@ public static class ThreadPollProxy{
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/25/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -550,7 +567,7 @@ public static class ThreadPollProxy{
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/07/25/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2020/07/27/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" itemprop="url">MySQL 数据库常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -562,8 +579,8 @@ public static class ThreadPollProxy{
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-25T11:47:05+08:00">
-                2020-07-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:54:43+08:00">
+                2020-07-27
               </time>
             
 
@@ -602,21 +619,1553 @@ public static class ThreadPollProxy{
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+            <p>MySQL 数据库常用命令</p>
+<p>1、MySQL常用命令</p>
+<p>create database name; 创建数据库</p>
+<p>use databasename; 选择数据库</p>
+<p>drop database name 直接删除数据库，不提醒</p>
+<p>show tables; 显示表</p>
+<p>describe tablename; 表的详细描述</p>
+<p>select 中加上distinct去除重复字段</p>
+<p>mysqladmin drop databasename 删除数据库前，有提示。</p>
+<p>显示当前mysql版本和当前日期</p>
+<p>select version(),current_date;</p>
+<p>2、修改mysql中root的密码：</p>
+<p>shell&gt;mysql -u root -p</p>
+<p>mysql&gt; update user set password=password(”xueok654123″) where user=’root’;</p>
+<p>mysql&gt; flush privileges //刷新数据库</p>
+<p>mysql&gt;use dbname； 打开数据库：</p>
+<p>mysql&gt;show databases; 显示所有数据库</p>
+<p>mysql&gt;show tables; 显示数据库mysql中所有的表：先use mysql；然后</p>
+<p>mysql&gt;describe user; 显示表mysql数据库中user表的列信息）；</p>
+<p>3、grant</p>
+<p>创建一个可以从任何地方连接服务器的一个完全的超级用户，但是必须使用一个口令something做这个</p>
+<p>mysql&gt; grant all privileges on <em>.</em> to user@localhost identified by ’something’ with</p>
+<p>增加新用户</p>
+<p>格式：grant select on 数据库.* to 用户名@登录主机 identified by “密码”</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO monty@localhost IDENTIFIED BY ’something’ WITH GRANT OPTION;</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO monty@”%” IDENTIFIED BY ’something’ WITH GRANT OPTION;</p>
+<p>删除授权：</p>
+<p>mysql&gt; revoke all privileges on <em>.</em> from root@”%”;</p>
+<p>mysql&gt; delete from user where user=”root” and host=”%”;</p>
+<p>mysql&gt; flush privileges;</p>
+<p>创建一个用户custom在特定客户端it363.com登录，可访问特定数据库fangchandb</p>
+<p>mysql &gt;grant select, insert, update, delete, create,drop on fangchandb.* to custom@ it363.com identified by ‘ passwd’</p>
+<p>重命名表:</p>
+<p>mysql &gt; alter table t1 rename t2;</p>
+<p>4、mysqldump</p>
+<p>备份数据库</p>
+<p>shell&gt; mysqldump -h host -u root -p dbname &gt;dbname_backup.sql</p>
+<p>恢复数据库</p>
+<p>shell&gt; mysqladmin -h myhost -u root -p create dbname</p>
+<p>shell&gt; mysqldump -h host -u root -p dbname &lt; dbname_backup.sql</p>
+<p>如果只想卸出建表指令，则命令如下：</p>
+<p>shell&gt; mysqladmin -u root -p -d databasename &gt; a.sql</p>
+<p>如果只想卸出插入数据的sql命令，而不需要建表命令，则命令如下：</p>
+<p>shell&gt; mysqladmin -u root -p -t databasename &gt; a.sql</p>
+<p>那么如果我只想要数据，而不想要什么sql命令时，应该如何操作呢？</p>
+<p>mysqldump -T./ phptest driver</p>
+<p>其中，只有指定了-T参数才可以卸出纯文本文件，表示卸出数据的目录，./表示当前目录，即与mysqldump同一目录。如果不指定driver 表，则将卸出整个数据库的数据。每个表会生成两个文件，一个为.sql文件，包含建表执行。另一个为.txt文件，只包含数据，且没有sql指令。</p>
+<p>5、可将查询存储在一个文件中并告诉mysql从文件中读取查询而不是等待键盘输入。可利用外壳程序键入重定向实用程序来完成这项工作。</p>
+<p>例如，如果在文件my_file.sql 中存放有查</p>
+<p>询，可如下执行这些查询：</p>
+<p>例如，如果您想将建表语句提前写在sql.txt中:</p>
+<p>mysql &gt; mysql -h myhost -u root -p database &lt; sql.txt</p>
+<p>转载声明：本文转自<a href="http://news.newhua.com/news1/program_database/2009/217/0921715343537K7H7IDI2CCI09JCI1DK8FJ4B07B3A04219G561C3JAB.html" target="_blank" rel="noopener">http://news.newhua.com/news1/program_database/2009/217/0921715343537K7H7IDI2CCI09JCI1DK8FJ4B07B3A04219G561C3JAB.html</a></p>
+<p>================================================================================</p>
+<p>转 mysql命令</p>
+<p>一 . 安装与配置MYSQL</p>
+<p>二 . 常用mysql命令行命令1 .mysql的启动与停止</p>
+<p>启动MYSQL服务 net start mysql</p>
+<p>停止MYSQL服务 net stop mysql</p>
+<p>2 . netstat –na | findstr 3306 查看被监听的端口 , findstr用于查找后面的端口是否存在</p>
+<p>3 . 在命令行中登陆MYSQL控制台 , 即使用 MYSQL COMMEND LINE TOOL</p>
+<p>语法格式 mysql –user=root –password=123456 db_name</p>
+<p>或 mysql –u root –p123456 db_name</p>
+<p>4 . 进入MYSQL命令行工具后 , 使用status; 或/s 查看运行环境信息</p>
+<p>5 . 切换连接数据库的语法 : use new_dbname;</p>
+<p>6 . 显示所有数据库 : show databases;</p>
+<p>7 . 显示数据库中的所有表 : show tables;</p>
+<p>8 . 显示某个表创建时的全部信息 : show create table table_name;</p>
+<p>9 . 查看表的具体属性信息及表中各字段的描述</p>
+<p>Describe table_name; 缩写形式 : desc table_name;</p>
+<p>三 。 MySql中的SQL语句</p>
+<p>1 . 数据库创建 : Create database db_name;</p>
+<p>数据库删除 : Drop database db_name; 删除时可先判断是否存在，写成 : drop database if exits db_name</p>
+<p>2 . 建表 : 创建数据表的语法 : create table table_name (字段1 数据类型 , 字段2 数据类型);</p>
+<p>例 : create table mytable (id int , username char(20));</p>
+<p>删表 : drop table table_name; 例 : drop table mytable;</p>
+<p>8 . 添加数据 : Insert into 表名 [(字段1 , 字段2 , ….)] values (值1 , 值2 , …..);</p>
+<p>如果向表中的每个字段都插入一个值,那么前面 [ ] 括号内字段名可写也可不写</p>
+<p>例 : insert into mytable (id,username) values (1,’zhangsan’);</p>
+<p>9 . 查询 : 查询所有数据 : select * from table_name;</p>
+<p>查询指定字段的数据 : select 字段1 , 字段2 from table_name;</p>
+<p>例 : select id,username from mytable where id=1 order by desc;多表查询语句————参照第17条实例</p>
+<p>10 . 更新指定数据 , 更新某一个字段的数据（注意，不是更新字段的名字）</p>
+<p>Update table_name set 字段名=’新值’ [, 字段2 =’新值’ , …..][where id=id_num] [order by 字段 顺序]</p>
+<p>例 : update mytable set username=’lisi’ where id=1;</p>
+<p>Order语句是查询的顺序 , 如 : order by id desc(或asc) , 顺序有两种 : desc倒序(100—1,即从最新数据往后查询),asc(从1-100)，Where和order语句也可用于查询select 与删除delete</p>
+<p>11 . 删除表中的信息 :</p>
+<p>删除整个表中的信息 : delete from table_name;</p>
+<p>删除表中指定条件的语句 : delete from table_name where 条件语句 ; 条件语句如 : id=3;</p>
+<p>12 . 创建数据库用户</p>
+<p>一次可以创建多个数据库用户如：</p>
+<p>CREATE USER username1 identified BY ‘password’ , username2 IDENTIFIED BY ‘password’….</p>
+<p>13 . 用户的权限控制：grant</p>
+<p>库，表级的权限控制 : 将某个库中的某个表的控制权赋予某个用户</p>
+<p>Grant all ON db_name.table_name TO user_name [ indentified by ‘password’ ];</p>
+<p>14 . 表结构的修改</p>
+<p>（1）增加一个字段格式：</p>
+<p>alter table table_name add column (字段名 字段类型); —-此方法带括号</p>
+<p>（2）指定字段插入的位置：</p>
+<p>alter table table_name add column 字段名 字段类型 after 某字段；</p>
+<p>删除一个字段：</p>
+<p>alter table table_name drop字段名;</p>
+<p>（3）修改字段名称/类型</p>
+<p>alter table table_name change 旧字段名 新字段名 新字段的类型;</p>
+<p>（4）改表的名字</p>
+<p>alter table table_name rename to new_table_name;</p>
+<p>（5）一次性清空表中的所有数据</p>
+<p>truncate table table_name; 此方法也会使表中的取号器(ID)从1开始</p>
+<p>15 . 增加主键，外键，约束，索引。。。。(使用方法见17实例)</p>
+<p>① 约束（主键Primary key、唯一性Unique、非空Not Null）</p>
+<p>② 自动增张 auto_increment</p>
+<p>③外键Foreign key—–与reference table_name(col_name列名)配合使用，建表时单独使用</p>
+<p>④ 删除多个表中有关联的数据—-设置foreign key 为set null —具体设置参考帮助文档</p>
+<p>16 . 查看数据库当前引擎</p>
+<p>SHOW CREATE TABLE table_name;</p>
+<p>修改数据库引擎</p>
+<p>ALTER TABLE table_name ENGINE=MyISAM | InnoDB;</p>
+<p>17 . SQL语句运用实例:</p>
+<p>–1 建users表</p>
+<p>create table users (id int primary key auto_increment,nikename varchar(20) not null unique,password varchar(100) not null,address varchar(200), reg_date timestamp not null default CURRENT_TIMESTAMP);</p>
+<p>–2 建articles表,在建表时设置外键</p>
+<p>create table articles (id int primary key auto_increment,content longtext not null,userid int,constraint foreign key (userid) references users(id) on delete set null);</p>
+<hr>
+<p>–2.1 建articles表,建表时不设置外键</p>
+<p>create table articles (id int primary key auto_increment,content longtext not null,userid int);</p>
+<p>–2.2 给articles表设置外键</p>
+<p>alter table articles add constraint foreign key (userid) references users(id) on delete set null;</p>
+<hr>
+<p>–3. 向users表中插入数据,同时插入多条</p>
+<p>insert into users (id,nikename,password,address) values (1,’lyh1’,’1234’,null),(10,’lyh22’,’4321’,’湖北武汉’),(null,’lyh333’,’5678’, ‘北京海淀’);</p>
+<p>–4. 向article中插入三条数据</p>
+<p>insert into articles (id,content,userid) values (2,’hahahahahaha’,11),(null,’xixixixixix’,10),(13,’aiaiaiaiaiaiaiaiaiaiaiaia’,1),(14,’hohoahaoaoooooooooo’,10);</p>
+<p>–5. 进行多表查询，选择users表中ID=10的用户发布的所有留言及该用户的所有信息</p>
+<p>select articles.id,articles.content,users.* from users,articles where users.id=10 and articles.userid=users.id order by articles.id desc;</p>
+<p>–6. 查看数据库引擎类型</p>
+<p>show create table users;</p>
+<p>–7. 修改数据库引擎类型</p>
+<p>alter table users engine=MyISAM;—因为users表中ID被设置成外键，执行此句会出错</p>
+<p>–8. 同表查询,已知一个条件的情况下.查询ID号大于用户lyh1的ID号的所有用户</p>
+<p>select a.id,a.nikename,a.address from users a,users b where b.nikename=’lyh1’ and a.id&gt;b.id;</p>
+<p>——也可写成</p>
+<p>select id,nikename,address from users where id&gt;(select id from users where nikename=’lyh1’);</p>
+<ol start="9">
+<li>显示年龄比领导还大的员工：</li>
+</ol>
+<p>select a.name from users a,users b where a.managerid=b.id and a.age&gt;b.age;</p>
+<p>查询编号为2的发帖人: 先查articles表,得到发帖人的编号,再根据编号查users得到的用户名。</p>
+<p>接着用关联查询.</p>
+<p>select * from articles,users得到笛卡儿积,再加order by articles.id以便观察</p>
+<p>使用select * from articles,users where articles.id=2 筛选出2号帖子与每个用户的组合记录</p>
+<p>再使用select * from articles,users where articles.id=2 and articles.userid=users.id选出users.id等于2号帖的发帖人id的记录.</p>
+<p>只取用户名:select user where user.id=(select userid from articles where article.id =2)</p>
+<p>找出年龄比小王还大的人:假设小王是28岁,先想找出年龄大于28的人</p>
+<p>select * from users where age&gt;(select age from users where name=’xiaowang’);</p>
+<p>*****要查询的记录需要参照表里面的其他记录:</p>
+<p>select a.name from users a,users b where b.name=’xiaowang’ and a.age&gt;b.age</p>
+<p>表里的每个用户都想pk一下.select a.nickname,b.nickname from users a,users b where a.id&gt;b.id ;</p>
+<p>更保险的语句:select a.nickname,b.nickname from (select * from users order by id) a,(se</p>
+<p>lect * from users order by id) b where a.id&gt;b.id ;</p>
+<p>再查询某个人发的所有帖子.</p>
+<p>select b.* from articles a , articles b where a.id=2 and a.userid=b.userid</p>
+<p>说明: 表之间存在着关系，ER概念的解释，用access中的示例数据库演示表之间的关系.只有innodb引擎才支持foreign key，mysql的任何引擎目前都不支持check约束。</p>
+<p>四、字符集出现错误解决办法</p>
+<p>出现的问题：</p>
+<p>mysql&gt; update users</p>
+<p>-&gt; set username=’关羽’</p>
+<p>-&gt; where userid=2;</p>
+<p>ERROR 1366 (HY000): Incorrect string value: ‘/xB9/xD8/xD3/xF0’ for column ‘usern</p>
+<p>ame’ at row 1</p>
+<p>向表中插入中文字符时，出现错误。</p>
+<p>mysql&gt; select * from users;</p>
+<p>+——–+———-+</p>
+<p>| userid | username |</p>
+<p>+——–+———-+</p>
+<p>| 2 | ???? |</p>
+<p>| 3 | ???? |</p>
+<p>| 4 | ?í?ù |</p>
+<p>+——–+———-+</p>
+<p>3 rows in set (0.00 sec)</p>
+<p>表中的中文字符位乱码。</p>
+<p>解决办法：</p>
+<p>使用命令：</p>
+<p>mysql&gt; status;</p>
+<hr>
+<p>mysql Ver 14.12 Distrib 5.0.45, for Win32 (ia32)</p>
+<p>Connection id: 8</p>
+<p>Current database: test</p>
+<p>Current user: root@localhost</p>
+<p>SSL: Not in use</p>
+<p>Using delimiter: ;</p>
+<p>Server version: 5.0.45-community-nt MySQL Community Edition (GPL)</p>
+<p>Protocol version: 10</p>
+<p>Connection: localhost via TCP/IP</p>
+<p>Server characterset: latin1</p>
+<p>Db characterset: latin1</p>
+<p>Client characterset: gbk</p>
+<p>Conn. characterset: gbk</p>
+<p>TCP port: 3306</p>
+<p>Uptime: 7 hours 39 min 19 sec</p>
+<p>Threads: 2 Questions: 174 Slow queries: 0 Opens: 57 Flush tables: 1 Open ta</p>
+<p>bles: 1 Queries per second avg: 0.006</p>
+<hr>
+<p>查看mysql发现Server characterset，Db characterset的字符集设成了latin1，所以出现中文乱码。</p>
+<p>mysql&gt; show tables;</p>
+<p>+—————-+</p>
+<p>| Tables_in_test |</p>
+<p>+—————-+</p>
+<p>| users |</p>
+<p>+—————-+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>更改表的字符集。</p>
+<p>mysql&gt; alter table users character set GBK;</p>
+<p>Query OK, 3 rows affected (0.08 sec)</p>
+<p>Records: 3 Duplicates: 0 Warnings: 0</p>
+<p>查看表的结构：</p>
+<p>mysql&gt; show create users;</p>
+<p>ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that</p>
+<p>corresponds to your MySQL server version for the right syntax to use near ‘users</p>
+<p>‘ at line 1</p>
+<p>mysql&gt; show create table users;</p>
+<p>+——-+———————————————————————–</p>
+<p>——————————————————————————+</p>
+<p>| Table | Create Table</p>
+<p>|</p>
+<p>+——-+———————————————————————–</p>
+<p>——————————————————————————+</p>
+<p>| users | CREATE TABLE <code>users</code> (</p>
+<p><code>userid</code> int(11) default NULL,</p>
+<p><code>username</code> char(20) character set latin1 default NULL</p>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=gbk |</p>
+<p>+——-+———————————————————————–</p>
+<p>——————————————————————————+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>mysql&gt; desc users;</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>| Field | Type | Null | Key | Default | Extra |</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>| userid | int(11) | YES | | NULL | |</p>
+<p>| username | char(20) | YES | | NULL | |</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>2 rows in set (0.02 sec)</p>
+<p>这时向表中插入中文然后有错误。</p>
+<p>mysql&gt; insert into users values(88,’中文’);</p>
+<p>ERROR 1366 (HY000): Incorrect string value: ‘/xD6/xD0/xCE/xC4’ for column ‘usern</p>
+<p>ame’ at row 1</p>
+<p>mysql&gt; insert into users values(88,’中文’);</p>
+<p>ERROR 1366 (HY000): Incorrect string value: ‘/xD6/xD0/xCE/xC4’ for column ‘usern</p>
+<p>ame’ at row 1</p>
+<p>还要更改users表的username的字符集。</p>
+<p>mysql&gt; alter table users modify username char(20) character set gbk;</p>
+<p>ERROR 1366 (HY000): Incorrect string value: ‘/xC0/xEE/xCB/xC4’ for column ‘usern</p>
+<p>ame’ at row 1</p>
+<p>mysql&gt; alter table users modify username char(20) character set gbk;</p>
+<p>ERROR 1366 (HY000): Incorrect string value: ‘/xC0/xEE/xCB/xC4’ for column ‘usern</p>
+<p>ame’ at row 1</p>
+<p>因为表中已经有数据，所以更改username字符集的操作没有成***</p>
+<p>清空users表中的数据</p>
+<p>mysql&gt; truncate table users;</p>
+<p>Query OK, 3 rows affected (0.01 sec)</p>
+<p>从新更改user表中username的字符集</p>
+<p>mysql&gt; alter table users modify username char(20) character set gbk;</p>
+<p>Query OK, 0 rows affected (0.06 sec)</p>
+<p>Records: 0 Duplicates: 0 Warnings: 0</p>
+<p>这时再插入中文字符，插入成***。</p>
+<p>mysql&gt; insert into users values(88,’中文’);</p>
+<p>Query OK, 1 row affected (0.01 sec)</p>
+<p>mysql&gt; select * from users;</p>
+<p>+——–+———-+</p>
+<p>| userid | username |</p>
+<p>+——–+———-+</p>
+<p>| 88 | 中文 |</p>
+<p>+——–+———-+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>mysql&gt;</p>
+<p>转载声明：本文转自<a href="http://hi.baidu.com/zhjlabm/blog/item/b939fc3307a1d445ad4b5fbd.html" target="_blank" rel="noopener">http://hi.baidu.com/zhjlabm/blog/item/b939fc3307a1d445ad4b5fbd.html</a></p>
+<p>================================================================================</p>
+<p>学习MySQL常用操作命令</p>
+<p>1、启动MySQL服务器</p>
+<p>实际上上篇已讲到如何启动MySQL。两种方法： 一是用winmysqladmin，如果机器启动时已自动运行，则可直接进入下一步操作。 二是在DOS方式下运行 d:mysqlbinmysqld</p>
+<p>2、进入mysql交互操作界面</p>
+<p>在DOS方式下，运行： d:mysqlbinmysql</p>
+<p>出现: mysql 的提示符，此时已进入mysql的交互操作方式。</p>
+<p>如果出现 “ERROR 2003: Can′t connect to MySQL server on ′localhost′ (10061)“，</p>
+<p>说明你的MySQL还没有启动。</p>
+<p>3、退出MySQL操作界面</p>
+<p>在mysql&gt;提示符下输入quit可以随时退出交互操作界面：</p>
+<p>mysql&gt; quit</p>
+<p>Bye</p>
+<p>你也可以用control-D退出。</p>
+<p>4、第一条命令</p>
+<p>mysql&gt; select version(),current_date();</p>
+<p>+—————-+—————–+</p>
+<p>| version() | current_date() |</p>
+<p>+—————-+—————–+</p>
+<p>| 3.23.25a-debug | 2001-05-17 |</p>
+<p>+—————-+—————–+</p>
+<p>1 row in set (0.01 sec)</p>
+<p>mysql&gt;</p>
+<p>此命令要求mysql服务器告诉你它的版本号和当前日期。尝试用不同大小写操作上述命令，看结果如何。结果说明mysql命令的大小写结果是一致的。</p>
+<p>练习如下操作：</p>
+<p>mysql&gt;Select (20+5)*4;</p>
+<p>mysql&gt;Select (20+5)*4,sin(pi()/3);</p>
+<p>mysql&gt;Select (20+5)*4 AS Result,sin(pi()/3); (AS: 指定假名为Result)</p>
+<p>5、多行语句</p>
+<p>一条命令可以分成多行输入，直到出现分号“；”为止：</p>
+<p>bordercolorlight = “black” bordercolordark = “#FFFFFF” align=”center”&gt;</p>
+<p>mysql&gt; select</p>
+<p>-&gt; USER()</p>
+<p>-&gt; ,</p>
+<p>-&gt; now()</p>
+<p>-&gt;;</p>
+<p>+——————–+———————+</p>
+<p>| USER() | now() |</p>
+<p>+——————–+———————+</p>
+<p>| ODBC@localhost | 2001-05-17 22:59:15 |</p>
+<p>+——————–+———————+</p>
+<p>1 row in set (0.06 sec)</p>
+<p>mysql&gt;</p>
+<p>注意中间的逗号和最后的分号的使用方法。</p>
+<p>6、一行多命令</p>
+<p>输入如下命令：</p>
+<p>mysql&gt; SELECT USER(); SELECT NOW();</p>
+<p>+——————+</p>
+<p>| USER() |</p>
+<p>+——————+</p>
+<p>| ODBC@localhost |</p>
+<p>+——————+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>+———————+</p>
+<p>| NOW() |</p>
+<p>+———————+</p>
+<p>| 2001-05-17 23:06:15 |</p>
+<p>+———————+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>mysql&gt;</p>
+<p>注意中间的分号，命令之间用分号隔开。</p>
+<p>7、显示当前存在的数据库</p>
+<p>mysql&gt; show databases;</p>
+<p>+———-+</p>
+<p>| Database |</p>
+<p>+———-+</p>
+<p>| mysql |</p>
+<p>| test |</p>
+<p>+———-+</p>
+<p>2 row in set (0.06 sec)</p>
+<p>mysql&gt;</p>
+<p>8、选择数据库并显示当前选择的数据库</p>
+<p>mysql&gt; USE mysql</p>
+<p>Database changed</p>
+<p>mysql&gt;</p>
+<p>(USE 和 QUIT 命令不需要分号结束。）</p>
+<p>mysql&gt; select database();</p>
+<p>+—————+</p>
+<p>| database() |</p>
+<p>+—————+</p>
+<p>| mysql |</p>
+<p>+—————+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>9、显示当前数据库中存在的表</p>
+<p>mysql&gt; SHOW TABLES;</p>
+<p>10、显示表(db)的内容</p>
+<p>mysql&gt;select * from db;</p>
+<p>11、命令的取消</p>
+<p>当命令输入错误而又无法改变（多行语句情形）时，只要在分号出现前就可以用 c来取消该条命令</p>
+<p>mysql&gt; select</p>
+<p>-&gt; user()</p>
+<p>-&gt; c</p>
+<p>mysql&gt;</p>
+<p>这是一些最常用的最基本的操作命令，通过多次练习就可以牢牢掌捂了</p>
+<p>==========================================================================</p>
+<p>mysql命令</p>
+<p>测试环境：mysql 5.0.45</p>
+<p>【注：可以在mysql中通过mysql&gt; SELECT VERSION();来查看数据库版本】</p>
+<p>整理：leo</p>
+<p>一、连接MYSQL。</p>
+<p>格式：mysql -h主机地址 -u用户名 －p用户密码</p>
+<p>1、连接到本机上的MYSQL。</p>
+<p>首先打开DOS窗口，然后进入目录mysql/bin，再键入命令mysql -u root -p，回车后提示你输密码.注意用户名前可以有空格也可以没有空格，但是密码前必须没有空格，否则让你重新输入密码.</p>
+<p>如果刚安装好MYSQL，超级用户root是没有密码的，故直接回车即可进入到MYSQL中了，MYSQL的提示符是： mysql&gt;</p>
+<p>2、连接到远程主机上的MYSQL。假设远程主机的IP为：110.110.110.110，用户名为root,密码为abcd123。则键入以下命令：</p>
+<p>mysql -h110.110.110.110 -u root -p 123;（注:u与root之间可以不用加空格，其它也一样）</p>
+<p>3、退出MYSQL命令： exit （回车）</p>
+<p>二、修改密码。</p>
+<p>格式：mysqladmin -u用户名 -p旧密码 password 新密码</p>
+<p>1、给root加个密码ab12。首先在DOS下进入目录mysql/bin，然后键入以下命令</p>
+<p>mysqladmin -u root -password ab12</p>
+<p>注：因为开始时root没有密码，所以-p旧密码一项就可以省略了。</p>
+<p>2、再将root的密码改为djg345。</p>
+<p>mysqladmin -u root -p ab12 password djg345</p>
+<p>三、增加新用户。</p>
+<p>（注意：和上面不同，下面的因为是MYSQL环境中的命令，所以后面都带一个分号作为命令结束符）</p>
+<p>格式：grant select on 数据库.* to 用户名@登录主机 identified by “密码”</p>
+<p>1、增加一个用户test1密码为abc，让他可以在任何主机上登录，并对所有数据库有查询、插入、修改、删除的权限。首先用root用户连入MYSQL，然后键入以下命令：</p>
+<p>grant select,insert,update,delete on <em>.</em> to [email=test1@”%]test1@”%[/email]” Identified by “abc”;</p>
+<p>但增加的用户是十分危险的，你想如某个人知道test1的密码，那么他就可以在internet上的任何一台电脑上登录你的mysql数据库并对你的数据可以为所欲为了，解决办法见2。</p>
+<p>2、增加一个用户test2密码为abc,让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作（localhost指本地主机，即MYSQL数据库所在的那台主机），</p>
+<p>这样用户即使用知道test2的密码，他也无法从internet上直接访问数据库，只能通过MYSQL主机上的web页来访问了。</p>
+<p>grant select,insert,update,delete on mydb.* to [email=test2@localhost]test2@localhost[/email] identified by “abc”;</p>
+<p>如果你不想test2有密码，可以再打一个命令将密码消掉。</p>
+<p>grant select,insert,update,delete on mydb.* to [email=test2@localhost]test2@localhost[/email] identified by “”;</p>
+<p>下篇我是MYSQL中有关数据库方面的操作。注意：你必须首先登录到MYSQL中，以下操作都是在MYSQL的提示符下进行的，而且每个命令以分号结束。</p>
+<p>一、操作技巧</p>
+<p>1、如果你打命令时，回车后发现忘记加分号，你无须重打一遍命令，只要打个分号回车就可以了。</p>
+<p>也就是说你可以把一个完整的命令分成几行来打，完后用分号作结束标志就OK。</p>
+<p>2、你可以使用光标上下键调出以前的命令。</p>
+<p>二、显示命令</p>
+<p>1、显示当前数据库服务器中的数据库列表：</p>
+<p>mysql&gt; SHOW DATABASES;</p>
+<p>注意：mysql库里面有MYSQL的系统信息，我们改密码和新增用户，实际上就是用这个库进行操作。</p>
+<p>2、显示数据库中的数据表：</p>
+<p>mysql&gt; USE 库名；</p>
+<p>mysql&gt; SHOW TABLES;</p>
+<p>3、显示数据表的结构：</p>
+<p>mysql&gt; DESCRIBE 表名;</p>
+<p>4、建立数据库：</p>
+<p>mysql&gt; CREATE DATABASE 库名;</p>
+<p>5、建立数据表：</p>
+<p>mysql&gt; USE 库名;</p>
+<p>mysql&gt; CREATE TABLE 表名 (字段名 VARCHAR(20), 字段名 CHAR(1));</p>
+<p>6、删除数据库：</p>
+<p>mysql&gt; DROP DATABASE 库名;</p>
+<p>7、删除数据表：</p>
+<p>mysql&gt; DROP TABLE 表名；</p>
+<p>8、将表中记录清空：</p>
+<p>mysql&gt; DELETE FROM 表名;</p>
+<p>9、显示表中的记录：</p>
+<p>mysql&gt; SELECT * FROM 表名;</p>
+<p>10、往表中插入记录：</p>
+<p>mysql&gt; INSERT INTO 表名 VALUES (”hyq”,”M”);</p>
+<p>11、更新表中数据：</p>
+<p>mysql-&gt; UPDATE 表名 SET 字段名1=’a’,字段名2=’b’ WHERE 字段名3=’c’;</p>
+<p>12、用文本方式将数据装入数据表中：</p>
+<p>mysql&gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE 表名;</p>
+<p>13、导入.sql文件命令：</p>
+<p>mysql&gt; USE 数据库名;</p>
+<p>mysql&gt; SOURCE d:/mysql.sql;</p>
+<p>14、命令行修改root密码：</p>
+<p>mysql&gt; UPDATE mysql.user SET password=PASSWORD(’新密码’) WHERE User=’root’;</p>
+<p>mysql&gt; FLUSH PRIVILEGES;</p>
+<p>15、显示use的数据库名：</p>
+<p>mysql&gt; SELECT DATABASE();</p>
+<p>16、显示当前的user：</p>
+<p>mysql&gt; SELECT USER();</p>
+<p>三、一个建库和建表以及插入数据的实例</p>
+<p>drop database if exists school;//如果存在SCHOOL则删除</p>
+<p>create database school;//建立库SCHOOL</p>
+<p>use school;//打开库SCHOOL</p>
+<p>create table teacher//建立表TEACHER</p>
+<p>(</p>
+<p>id int(3) auto_increment not null primary key,</p>
+<p>name char(10) not null,</p>
+<p>address varchar(50) default ‘深圳’,</p>
+<p>year date</p>
+<p>);//建表结束</p>
+<p>//以下为插入字段</p>
+<p>insert into teacher values(”,’allen’,’大连一中’,’1976-10-10′);</p>
+<p>insert into teacher values(”,’jack’,’大连二中’,’1975-12-23′);</p>
+<p>如果你在mysql提示符键入上面的命令也可以，但不方便调试。</p>
+<p>（1）你可以将以上命令原样写入一个文本文件中，假设为school.sql，然后复制到c://下，并在DOS状态进入目录[url=file:////mysql//bin]//mysql//bin[/url]，然后键入以下命令：</p>
+<p>mysql -uroot -p密码 &lt; c://school.sql</p>
+<p>如果成功，空出一行无任何显示；如有错误，会有提示。（以上命令已经调试，你只要将//的注释去掉即可使用）。</p>
+<p>（2）或者进入命令行后使用 mysql&gt; source c://school.sql; 也可以将school.sql文件导入数据库中。</p>
+<p>四、将文本数据转到数据库中</p>
+<p>1、文本数据应符合的格式：字段数据之间用tab键隔开，null值用[url=file:////n]//n[/url]来代替.例：</p>
+<p>3 rose 大连二中 1976-10-10</p>
+<p>4 mike 大连一中 1975-12-23</p>
+<p>假设你把这两组数据存为school.txt文件，放在c盘根目录下。</p>
+<p>2、数据传入命令 load data local infile “c://school.txt” into table 表名;</p>
+<p>注意：你最好将文件复制到[url=file:////mysql//bin]//mysql//bin[/url]目录下，并且要先用use命令打表所在的库。</p>
+<p>五、备份数据库</p>
+<p>1.导出整个数据库</p>
+<p>导出文件默认是存在mysql/bin目录下</p>
+<p>mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名</p>
+<p>mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql</p>
+<p>2.导出一个表</p>
+<p>mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名</p>
+<p>mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql</p>
+<p>3.导出一个数据库结构</p>
+<p>mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql</p>
+<p>-d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table</p>
+<p>4.带语言参数导出</p>
+<p>mysqldump -uroot -p –default-character-set=latin1 –set-charset=gbk –skip-opt database_name &gt; outfile_name.sql</p>
+<p>六、导入数据库</p>
+<p>例如：数据库名为 dbTest</p>
+<p>首先，进入mysql</p>
+<p>mysql -uroot -p123456</p>
+<p>然后，创建数据库</p>
+<p>createdbTest</p>
+<p>exit</p>
+<p>最后，导入数据库</p>
+<p>mysql -uroot -p123456dbTest</p>
+<p>数据库及表导出导入示例：</p>
+<p>导出数据库</p>
+<p>mysqldump -u root -p123456 gameTop &gt;gameTop_db.sql</p>
+<p>导出数据库的表</p>
+<p>mysqldump -u-p123456rootgameTopgametop800 &gt;gameTop_table.sql</p>
+<p>导出数据库的特定表</p>
+<p>mysqldump -u root -p123456gameTop–tablegametop800&gt;gameTop_table.sql</p>
+<p>导出数据库（只导结构，不要数据）</p>
+<p>mysqldump -u root -p123456–opt -dgameTop &gt;gameTop_db.sql</p>
+<p>或者</p>
+<p>mysqldump -u root -p123456-dgameTop &gt;gameTop_db.sql</p>
+<p>导出数据库（只导数据，不要结构）</p>
+<p>mysqldump -u root -p123456-tgameTop &gt;gameTop_db.sql</p>
+<p>注：不加 -d 和 -t 则既导出结构，也导出数据</p>
+<p>mysqldump导出抛出异常：</p>
+<p>mysqldump: Got error: 1044: Access denied for user ‘username’@’%’ to database ‘dbname’ when using LOCK TABLES</p>
+<p>解决办法，添加参数–skip-lock-tables：</p>
+<p>mysqldump–skip-lock-tables-h172.88.12.102 -username-pAnJnVs3C2tYXyTwV dbname&gt; dbname_bk.sql</p>
+<hr>
+<p>导入数据库：</p>
+<p>登录MySQL:      mysql -uroot -p123456</p>
+<p>创建数据库：    create databasegameTop;</p>
+<p>导入数据库：</p>
+<p>mysql -uroot -p123456gameTop</p>
+<p>导入数据库表：</p>
+<p>mysql -uroot -p123456 gameTopgametop800</p>
+<p>导入数据库表：</p>
+<p>mysql -uroot -p123456 gameTop  </p>
+<p>==================================================================================</p>
+<p>1:使用SHOW语句找出在服务器上当前存在什么数据库：</p>
+<p>mysql&gt; SHOW DATABASES;</p>
+<p>2:创建一个数据库MYSQLDATA</p>
+<p>mysql&gt; CREATE DATABASE MYSQLDATA;</p>
+<p>3:选择你所创建的数据库</p>
+<p>mysql&gt; USE MYSQLDATA; (按回车键出现Database changed 时说明操作成功！)</p>
+<p>4:查看现在的数据库中存在什么表</p>
+<p>mysql&gt; SHOW TABLES;</p>
+<p>5:创建一个数据库表</p>
+<p>mysql&gt; CREATE TABLE MYTABLE (name VARCHAR(20), sex CHAR(1));</p>
+<p>6:显示表的结构：</p>
+<p>mysql&gt; DESCRIBE MYTABLE;</p>
+<p>7:往表中加入记录</p>
+<p>mysql&gt; insert into MYTABLE values (”hyq”,”M”);</p>
+<p>8:用文本方式将数据装入数据库表中（例如D:/mysql.txt）</p>
+<p>mysql&gt; LOAD DATA LOCAL INFILE “D:/mysql.txt” INTO TABLE MYTABLE;</p>
+<p>9:导入.sql文件命令（例如D:/mysql.sql）</p>
+<p>mysql&gt;use database;</p>
+<p>mysql&gt;source d:/mysql.sql;</p>
+<p>10:删除表</p>
+<p>mysql&gt;drop TABLE MYTABLE;</p>
+<p>11:清空表</p>
+<p>mysql&gt;delete from MYTABLE;</p>
+<p>12:更新表中数据</p>
+<p>mysql&gt;update MYTABLE set sex=”f” where name=’hyq’;</p>
+<p>以下是无意中在网络看到的使用MySql的管理心得,</p>
+<p>在windows中MySql以服务形式存在，在使用前应确保此服务已经启动，未启动可用net start mysql命令启动。而Linux中启动时可用“/etc/rc.d/init.d/mysqld start”命令，注意启动者应具有管理员权限。</p>
+<p>刚安装好的MySql包含一个含空密码的root帐户和一个匿名帐户，这是很大的安全隐患，对于一些重要的应用我们应将安全性尽可能提高，在这里应把匿名帐户删除、 root帐户设置密码，可用如下命令进行：</p>
+<p>use mysql;</p>
+<p>delete from User where User=””;</p>
+<p>update User set Password=PASSWORD(’newpassword’) where User=’root’;</p>
+<p>如果要对用户所用的登录终端进行限制，可以更新User表中相应用户的Host字段，在进行了以上更改后应重新启动数据库服务，此时登录时可用如下类似命令：</p>
+<p>mysql -uroot -p;</p>
+<p>mysql -uroot -pnewpassword;</p>
+<p>mysql mydb -uroot -p;</p>
+<p>mysql mydb -uroot -pnewpassword;</p>
+<p>上面命令参数是常用参数的一部分，详细情况可参考文档。此处的mydb是要登录的数据库的名称。</p>
+<p>在 进行开发和实际应用中，用户不应该只用root用户进行连接数据库，虽然使用root用户进行测试时很方便，但会给系统带来重大安全隐患，也不利于管理技 术的提高。我们给一个应用中使用的用户赋予最恰当的数据库权限。如一个只进行数据插入的用户不应赋予其删除数据的权限。</p>
+<p>MySql的用户管理是通过 User表来实现的，添加新用户常用的方法有两个，一是在User表插入相应的数据行，同时设置相应的权限；二是通过GRANT命令创建具有某种权限的用 户。其中GRANT的常用用法如下：</p>
+<p>grant all on mydb.* to NewUserName@HostName identified by “password” ;</p>
+<p>grant usage on <em>.</em> to NewUserName@HostName identified by “password”;</p>
+<p>grant select,insert,update on mydb.* to NewUserName@HostName identified by “password”;</p>
+<p>grant update,delete on mydb.TestTable to NewUserName@HostName identified by “password”;</p>
+<p>若 要给此用户赋予他在相应对象上的权限的管理能力，可在GRANT后面添加WITH GRANT OPTION选项。而对于用插入User表添加的用户，Password字段应用PASSWORD 函数进行更新加密，以防不轨之人窃看密码。对于那些已经不用的用户应给予清除，权限过界的用户应及时回收权限，回收权限可以通过更新User表相应字段， 也可以使用REVOKE操作。</p>
+<p>下面给出本人从其它资料(<a href="http://www.cn-java.com)获得的对常用权限的解释：">www.cn-java.com)获得的对常用权限的解释：</a></p>
+<p>全局管理权限：</p>
+<p>FILE: 在MySQL服务器上读写文件。</p>
+<p>PROCESS: 显示或杀死属于其它用户的服务线程。</p>
+<p>RELOAD: 重载访问控制表，刷新日志等。</p>
+<p>SHUTDOWN: 关闭MySQL服务。</p>
+<p>数据库/数据表/数据列权限：</p>
+<p>ALTER: 修改已存在的数据表(例如增加/删除列)和索引。</p>
+<p>CREATE: 建立新的数据库或数据表。</p>
+<p>DELETE: 删除表的记录。</p>
+<p>DROP: 删除数据表或数据库。</p>
+<p>INDEX: 建立或删除索引。</p>
+<p>INSERT: 增加表的记录。</p>
+<p>SELECT: 显示/搜索表的记录。</p>
+<p>UPDATE: 修改表中已存在的记录。</p>
+<p>特别的权限：ALL: 允许做任何事(和root一样)。</p>
+<p>USAGE: 只允许登录–其它什么也不允许做。</p>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="Upload-to-github"><a href="#Upload-to-github" class="headerlink" title="Upload to github"></a>Upload to github</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br><span class="line">hexo server -d</span><br></pre></td></tr></table></figure>
-<h3 id="Start-hexo-admin"><a href="#Start-hexo-admin" class="headerlink" title="Start hexo-admin"></a>Start hexo-admin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -d</span><br></pre></td></tr></table></figure>
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/%E7%94%A8pomise%E5%AF%B9wx-request%E7%9A%84%E5%B0%81%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/%E7%94%A8pomise%E5%AF%B9wx-request%E7%9A%84%E5%B0%81%E8%A3%85/" itemprop="url">用pomise对wx.request的封装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:52:50+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">function request(url,data &#x3D; &#123;&#125;, method &#x3D; &quot;GET&quot;) &#123;</span><br><span class="line"></span><br><span class="line">  return new Promise(function (resolve, reject) &#123;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url: url,</span><br><span class="line"></span><br><span class="line">      data: data,</span><br><span class="line"></span><br><span class="line">      method: method,</span><br><span class="line"></span><br><span class="line">      header: &#123;</span><br><span class="line"></span><br><span class="line">        &#39;Content-Type&#39;: &#39;application&#x2F;json&#39;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      success: function (res) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;console.log(res.data);</span><br><span class="line"></span><br><span class="line">            resolve(res.data);</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      fail: function (err) &#123;</span><br><span class="line"></span><br><span class="line">        reject(err)</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; console.log(&quot;failed&quot;)</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line"></span><br><span class="line">  getdata: request</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/html5-css3-jquery%E5%AE%8C%E6%88%90%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/html5-css3-jquery%E5%AE%8C%E6%88%90%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" itemprop="url">html5+css3+jquery完成响应式布局</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:41:02+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>响应式布局，流体布局，自适应布局，静态布局等等，这是移动设备的飞速发展，前端人员不得不跟上潮流的一个方向。实际上各种设备尺寸，分辨率大都不同，真的适应各种设备依旧是不现实的，首先是浏览器差异化，让我们去hack，现在是终端问题，让我展现出不同的设备不同的样式，折腾来折腾去，终于我们走进了热火朝天的响应式布局，自适应只能算是响应式布局的一个子集吧，对于流体个栅格后面会再次提到，有兴趣可以关注。</p>
+<p>首先讲讲实现原理吧，css3的媒体查询功能的确帮了我们很大一个忙，@media query，它的出现也带出了响应式布局的一连串东西，经典的是来自国外伟人的布局这里就不多阐述，我待会儿会提出一个实际的例子，本人测试过有效。@media query它可以检查我们的设备的分辨率，但是我们往往是设置一个区间，这样一个区间一个区间的去布局代码，让我们在手机端打开是一个效果，pc端一个效果，平板一种样式。</p>
+<p>注意一点，手机网站不等于在手机端打开网页，这是两个不同的概念。手机网站我一直是使用jquery mobile 实现的前端设计，话不多说看代码：</p>
+<p>html：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;navBox&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;nav&quot;&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;current&quot;&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;首页&lt;small&gt;home&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;电影&lt;small&gt;movie&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;电视剧&lt;small&gt;tv play&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;动漫&lt;small&gt;comic&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;综艺&lt;small&gt;variety&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;纪录片&lt;small&gt;documentary&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; target&#x3D;&quot;_blank&quot;&gt;公开课&lt;small&gt;public resourse&lt;&#x2F;small&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;!--match IE9,IE10 or not ie--&gt;</span><br><span class="line">        &lt;!--[if (get IE 8) | ! (IE)]&gt;&lt;!--&gt;</span><br><span class="line">        &lt;h1 class&#x3D;&quot;title&quot;&gt;&lt;a href&#x3D;&quot;#&quot;&gt;腾讯视频&lt;&#x2F;a&gt;&lt;span class&#x3D;&quot;btn&quot;&gt;&lt;img src&#x3D;&quot;image&#x2F;btn.png&quot; width&#x3D;&quot;34&quot; height&#x3D;&quot;34&quot; alt&#x3D;&quot;&quot;&#x2F;&gt;&lt;&#x2F;span&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">        &lt;!--&lt;![endif]--&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>这里识别了一次ie,但是我并没有设置其IE6-8的样式，就测试玩玩。</p>
+<p>css：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;utf-8&quot;;</span><br><span class="line">&#x2F;* CSS Document *&#x2F;</span><br><span class="line">*&#123;</span><br><span class="line">    padding:0px;</span><br><span class="line">    margin:0px;</span><br><span class="line">    border:0px;</span><br><span class="line">&#125;</span><br><span class="line">.navBox &#123;</span><br><span class="line">    width:100%;</span><br><span class="line">    height:40px;</span><br><span class="line">    background:#333;</span><br><span class="line">&#125;</span><br><span class="line">.nav&#123;</span><br><span class="line">    margin:0 auto;</span><br><span class="line">    border:0px solid #ccc;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul &#123;</span><br><span class="line">    list-style:none;</span><br><span class="line">    width:auto;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li &#123;</span><br><span class="line">    height:40px;</span><br><span class="line">    text-align:center;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li a &#123;</span><br><span class="line">    display:block;</span><br><span class="line">    font-size:16px;</span><br><span class="line">    text-decoration:none;</span><br><span class="line">    line-height:39px;</span><br><span class="line">    color:rgba(103,204,247,1.00);</span><br><span class="line">&#125;</span><br><span class="line">@media screen and (min-width: 1000px) &#123;</span><br><span class="line">.nav&#123;</span><br><span class="line">    width:1000px;</span><br><span class="line">    height:40px;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:auto;</span><br><span class="line">    min-width:120px;</span><br><span class="line">    margin-left:10px;    </span><br><span class="line">&#125;</span><br><span class="line">.nav ul li.current &#123;</span><br><span class="line">    background:#f60;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li:hover a &#123;</span><br><span class="line">    background-color:#f60;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li.current:hover a &#123;</span><br><span class="line">    color:#fff;</span><br><span class="line">&#125;</span><br><span class="line">.nav .title &#123;</span><br><span class="line">    display:none;</span><br><span class="line">&#125;    </span><br><span class="line">&#125;</span><br><span class="line">@media screen and (min-width: 640px) and (max-width: 1000px) &#123;</span><br><span class="line">.nav &#123;</span><br><span class="line">    width:auto;</span><br><span class="line">    height:40px;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li &#123;</span><br><span class="line">    float:left;</span><br><span class="line">    width:14%;</span><br><span class="line">    min-width:80px;</span><br><span class="line">    font-size:12px;</span><br><span class="line">    line-height:20px;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li.current &#123;</span><br><span class="line">    background-color:#f60;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li:hover a &#123;</span><br><span class="line">    background-color:#f60;</span><br><span class="line">&#125;</span><br><span class="line">.nav ul li.current:hover a &#123;</span><br><span class="line">    color:#fff;</span><br><span class="line">&#125;</span><br><span class="line">small &#123;</span><br><span class="line">    display:none;</span><br><span class="line">&#125;</span><br><span class="line">.nav .title &#123;</span><br><span class="line">    display:none;</span><br><span class="line">&#125;    </span><br><span class="line">&#125;</span><br><span class="line">@media screen and (max-width: 640px) &#123;</span><br><span class="line">    .navBox &#123;</span><br><span class="line">        height:auto;</span><br><span class="line">        background:#444;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav &#123;</span><br><span class="line">        width:auto;</span><br><span class="line">        height:auto;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav ul &#123;</span><br><span class="line">        position:relative;</span><br><span class="line">        display:none;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav ul li &#123;</span><br><span class="line">        width:100%;</span><br><span class="line">        min-width:100px;</span><br><span class="line">        background:#333;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav ul li a:active,</span><br><span class="line">    .nav ul li a:hover &#123;</span><br><span class="line">        background-color:#f60;</span><br><span class="line">        transition:all ease-in 0.3s;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav ul li.current&#123;</span><br><span class="line">        background-color:#f60;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav .title &#123;</span><br><span class="line">        position:relative;</span><br><span class="line">        width:100%;</span><br><span class="line">        height:40px;</span><br><span class="line">        border-top:1px solid #444;</span><br><span class="line">        background:#333;</span><br><span class="line">        text-align:center;</span><br><span class="line">        letter-spacing:1px;</span><br><span class="line">        font-size:24px;</span><br><span class="line">        line-height:40px;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav .title a &#123;</span><br><span class="line">        color:#f60;</span><br><span class="line">        text-decoration:none;</span><br><span class="line">    &#125;</span><br><span class="line">    .nav .title .btn &#123;</span><br><span class="line">        position:absolute;</span><br><span class="line">        right:10px;</span><br><span class="line">        top:0px;</span><br><span class="line">        width:34px;</span><br><span class="line">        cursor:pointer;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>我把屏幕区间设置成三个不同的区间，@media screen and (min-width: 1000px){//放置像素1000+屏幕的css样式渲染网页，这里是做的导航菜单}</p>
+<p>@media screen and (min-width: 640px) and (max-width: 1000px){//这里放置屏幕像素640到1000的css样式}</p>
+<p>@media screen and (max-width: 400px) {//这里放置小于等于640像素的样式}</p>
+<p>三个区间可以按照你的兴趣或者要求设置成不同的样式，不过大体样式建议相同，不然用户一打开了发现傻缺了，咋个不是这个网站了哇，于是果断关闭那就尴尬了。</p>
+<p>jquery代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">$(document).ready(function ()&#123;</span><br><span class="line">    $(&quot;.btn&quot;).on(&quot;click&quot;,function()&#123;</span><br><span class="line">        $(&quot;.nav&quot;).find(&quot;ul&quot;).slideToggle(400);</span><br><span class="line">        &#125;);    </span><br><span class="line">&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>脚本代码很简单了，我就简单不去分辨他在那个区间了，因为他只有在屏幕像素小于640像素的时候才会出现并且被看到，其他的情况我都将其display隐藏了，完成这一步就可以看到我点击旁边的缩放标签弹出UL标签，下滑上拉的效果，总体来说还是非常简单的，下面附上三张对应不同尺寸的效果图。</p>
+<p>像素位于1000+的时候：</p>
+<p><img src="/images/pasted-0.png" alt="upload successful"></p>
+<p>像素位于640到1000时：</p>
+<p><img src="/images/pasted-1.png" alt="upload successful"></p>
+<p>像素小于640时：</p>
+<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<p>点击下拉收起：</p>
+<p><img src="/images/pasted-3.png" alt="upload successful"></p>
+<p>就完成了这次的导航响应式布局操作，后面还会分享更多内容，在这里我个人觉得dwcc2015+版本的软件对于前端来说有一定的好处，就是可以调整屏幕像素进行布局，当然了其中的bootstrap组件也可以完成相应的内容啦.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/flex%E5%B8%83%E5%B1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/flex%E5%B8%83%E5%B1%80/" itemprop="url">flex布局</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:37:29+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="空白填充"><a href="#空白填充" class="headerlink" title="空白填充"></a>空白填充</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;itemempty&quot; style&#x3D;&quot;width:50px;height:0;&quot; &gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="图片宽高相同设置"><a href="#图片宽高相同设置" class="headerlink" title="图片宽高相同设置"></a>图片宽高相同设置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  position:relative;  </span><br><span class="line">  width:20%;</span><br><span class="line">  padding-bottom:20%;</span><br><span class="line">&#125;</span><br><span class="line">.box img&#123;</span><br><span class="line">  position:absolute;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  width:100%;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class&#x3D;&quot;box&quot;&gt;</span><br><span class="line">  &lt;img src&#x3D;&quot;&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%E5%B1%85%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%95%8C%E9%9D%A2%E5%B1%85%E4%B8%AD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" itemprop="url">小程序界面居中问题解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:36:36+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;view style&#x3D;&#39;height:200rpx;background: white;color:#333333;display:flex;align-items: center;justify-content: space-around;word-break:break-all;overflow: scroll;flex:1;padding:0 5rpx;&#39;&gt;</span><br><span class="line">      &lt;view style&#x3D;&#39;max-height:200rpx;width:100%;&#39;&gt;</span><br><span class="line">汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情汇报详情</span><br><span class="line">      &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%A4%87%E4%BB%BD%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/mysql%E5%A4%87%E4%BB%BD%E7%B1%BB/" itemprop="url">mysql备份类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:34:55+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public ResponseEntity databack()&#123;</span><br><span class="line">        Date date&#x3D;new Date();</span><br><span class="line">        SimpleDateFormat sdf &#x3D; new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);</span><br><span class="line">        String name&#x3D;sdf.format(date);</span><br><span class="line">        try &#123;</span><br><span class="line">            Runtime rt &#x3D; Runtime.getRuntime();</span><br><span class="line">            &#x2F;&#x2F;String cmd &#x3D;&quot;mysqldump -h localhost -uroot -proot dsyc_gym &gt; e:&#x2F;mysql.sql&quot;; &#x2F;&#x2F;一定要加 -h localhost(或是服务器IP地址)</span><br><span class="line">            String cmd &#x3D;&quot;mysqldump -h 127.0.0.1 -uroot -proot dsyc_gym &gt; &#x2F;Users&#x2F;haozhihui&#x2F;Documents&#x2F;mysqlbackup&#x2F;name.sql&quot;;</span><br><span class="line">            &#x2F;&#x2F;rt.exec(&quot;cmd &#x2F;c &quot; + cmd);</span><br><span class="line">            rt.exec( new String[] &#123; &quot;sh&quot;, &quot;-c&quot;, cmd &#125;);</span><br><span class="line">            LOGGER.info(String.valueOf(rt.exec(&quot;javac&quot;)));</span><br><span class="line">            return ResponseEntity.success(&quot;备份成功&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return ResponseEntity.failure(&quot;备份失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/mysql%E7%9B%B8%E5%85%B3/" itemprop="url">解决mysql server has gone away</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:33:27+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mysql出现ERROR : (2006, ‘MySQL server has gone away’) 的问题意思就是指client和MySQL server之间的链接断开了。</p>
+<p>造成这样的原因一般是sql操作的时间过长，或者是传送的数据太大(例如使用insert … values的语句过长， 这种情况可以通过修改max_allowed_packed的配置参数来避免，也可以在程序中将数据分批插入)。</p>
+<p>产生这个问题的原因有很多，总结下网上的分析：</p>
+<p><strong>原因一. MySQL 服务宕了</strong></p>
+<p>判断是否属于这个原因的方法很简单，进入mysql控制台，查看mysql的运行时长</p>
+<p>mysql&gt; show global status like ‘uptime’;<br>+—————+———+<br>| Variable_name | Value   |<br>+—————+———+<br>| Uptime        | 3414707 |<br>+—————+———+</p>
+<p>1 row in set或者查看MySQL的报错日志，看看有没有重启的信息</p>
+<p>如果uptime数值很大，表明mysql服务运行了很久了。说明最近服务没有重启过。<br>如果日志没有相关信息，也表名mysql服务最近没有重启过，可以继续检查下面几项内容。</p>
+<p><strong>原因二. mysql连接超时</strong></p>
+<p>即某个mysql长连接很久没有新的请求发起，达到了server端的timeout，被server强行关闭。<br>此后再通过这个connection发起查询的时候，就会报错server has gone away<br>（大部分PHP脚本就是属于此类）</p>
+<p>mysql&gt; show global variables like ‘%timeout’;<br>+—————————-+———-+<br>| Variable_name              | Value    |<br>+—————————-+———-+<br>| connect_timeout            | 10       |<br>| delayed_insert_timeout     | 300      |<br>| innodb_lock_wait_timeout   | 50       |<br>| innodb_rollback_on_timeout | OFF      |<br>| interactive_timeout        | 28800    |<br>| lock_wait_timeout          | 31536000 |<br>| net_read_timeout           | 30       |<br>| net_write_timeout          | 60       |<br>| slave_net_timeout          | 3600     |<br>| wait_timeout               | 28800    |<br>+—————————-+———-+<br>10 rows in set</p>
+<p>wait_timeout 是28800秒，即mysql链接在无操作28800秒后被自动关闭</p>
+<p><strong>原因三. mysql请求链接进程被主动kill</strong></p>
+<p>这种情况和原因二相似，只是一个是人为一个是MYSQL自己的动作</p>
+<p>mysql&gt; show global status like ‘com_kill’;<br>+—————+——-+<br>| Variable_name | Value |<br>+—————+——-+<br>| Com_kill      | 21    |<br>+—————+——-+<br>1 row in set原因四. Your SQL statement was too large.</p>
+<p>当查询的结果集超过 max_allowed_packet 也会出现这样的报错。定位方法是打出相关报错的语句。</p>
+<p>用select * into outfile 的方式导出到文件，查看文件大小是否超过 max_allowed_packet ，如果超过则需要调整参数，或者优化语句。</p>
+<p>mysql&gt; show global variables like ‘max_allowed_packet’;<br>+——————–+———+<br>| Variable_name      | Value   |<br>+——————–+———+<br>| max_allowed_packet | 1048576 |<br>+——————–+———+<br>1 row in set (0.00 sec)</p>
+<p>修改参数：</p>
+<p>mysql&gt; set global max_allowed_packet=1024<em>1024</em>16;<br>mysql&gt; show global variables like ‘max_allowed_packet’;<br>+——————–+———-+<br>| Variable_name      | Value    |<br>+——————–+———-+<br>| max_allowed_packet | 16777216 |<br>+——————–+———-+<br>1 row in set (0.00 sec)</p>
+<p><strong>以下是补充：</strong><br>应用程序长时间的执行批量的MYSQL语句。执行一个SQL，但SQL语句过大或者语句中含有BLOB或者longblob字段。比如，图片数据的处理。都容易引起MySQL server has gone away。</p>
+<p>今天遇到类似的情景，MySQL只是冷冷的说：MySQL server has gone away。</p>
+<p>大概浏览了一下，主要可能是因为以下几种原因：<br>一种可能是发送的SQL语句太长，以致超过了max_allowed_packet的大小，如果是这种原因，你只要修改my.cnf，加大max_allowed_packet的值即可。</p>
+<p>还有一种可能是因为某些原因导致超时，比如说程序中获取数据库连接时采用了Singleton的做法，虽然多次连接数据库，但其实使用的都是同一个连接，而且程序中某两次操作数据库的间隔时间超过了wait_timeout（SHOW STATUS能看到此设置），那么就可能出现问题。最简单的处理方式就是把wait_timeout改大，当然你也可以在程序里时不时顺手mysql_ping()一下，这样MySQL就知道它不是一个人在战斗。</p>
+<p><strong>解决MySQL server has gone away</strong></p>
+<p><strong>1、应用程序长时间的执行批量的MYSQL语句。最常见的就是采集或者新旧数据转化。或者长时间闲置数据库连接（我的项目就是这样）</strong><br>解决方案：<br>在my.cnf文件中添加或者修改以下两个变量：</p>
+<pre>1 wait_timeout=2880000 
+2 interactive_timeout = 2880000 </pre>
+
+<p>关于两个变量的具体说明可以google或者看官方手册。如果不能修改my.cnf，则可以在连接数据库的时候设置CLIENT_INTERACTIVE，比如：</p>
+<pre>1 sql = "set interactive_timeout=24*3600"; 2 mysql_real_query(...) </pre>
+
+<p>2、执行一个SQL，但SQL语句过大或者语句中含有BLOB或者longblob字段。比如，图片数据的处理<br>解决方案：<br>在my.cnf文件中添加或者修改以下变量：</p>
+<pre>1 max_allowed_packet = 10M(也可以设置自己需要的大小) </pre>
+
+<p>max_allowed_packet 参数的作用是，用来控制其通信缓冲区的最大长度。</p>
+<p>最近在做一个项目，需要程序24小时开着，而中间会有很多闲置时间，于是每天早上过来第一次操作数据库时，就出现了“MySQL server has gone away”这样的错误提示，而这个问题的原因是由于数据库连接由于长时间没有操作而会被自动关闭。解决这个问题，我的经验有以下两点，或许对大家有用处：<br><strong>第 一种方法：</strong> 当然是增加你的 wait-timeout值，这个参数是在my.cnf(在Windows下台下面是my.ini）中设置，我的数据库负荷稍微大一点，所以，我设置的值 为10，（这个值的单位是秒，意思是当一个数据库连接在10秒钟内没有任何操作的话，就会强行关闭，我使用的不是永久链接 （mysql_pconnect),用的是mysql_connect,关于这个wait-timeout的效果你可以在MySQL的进程列表中看到 （show processlist) ），你可以把这个wait-timeout设置成更大，比如300秒，呵呵，一般来讲300秒足够用了，其实你也可以不用设置，MySQL默认是8个小 时。情况由你的服务器和站点来定。<br><strong>第二种方法：</strong><br>这也是我个人认为最好的方法，即检查 MySQL的链接状态，使其重新链接。 （用mysql_ping()）<br>可能大家都知道有mysql_ping这么一个函数，在很多资料中都说这个mysql_ping的 API会检查数据库是否链接，如果是断开的话会尝试重新连接，但在我的测试过程中发现事实并不是这样子的，是有条件的，必须要通过 mysql_options这个C API传递相关参数，让MYSQL有断开自动链接的选项（MySQL默认为不自动连接），但我测试中发现PHP的MySQL的API中并不带这个函数，你重新编辑MySQL吧，呵呵。但mysql_ping这个函数还是终于能用得上的，只是要在其中有一个小小的操作技巧： </p>
+<p><a href="javascript:void(0);" title="复制代码"><img src="https://upload-images.jianshu.io/upload_images/10868025-89114a3bc3b48f16.gif?imageMogr2/auto-orient/strip" alt="复制代码"></a> </p>
+<pre> 1 //使用mysql_ping来自动检查重连。用到两个函数，一个是mysql_ping，另外一个是mysql_options。具体使用方法是在mysql_real_connect之前，mysql_init之后，使用mysql_options。用法如下：
+ 2  char value = 1;
+ 3 (void) mysql_init (&mysql);
+ 4  mysql_options(&mysql, MYSQL_OPT_RECONNECT, (char *)&value);   //设置自动连接
+ 5 //然后在以后mysql_query之前首先使用mysql_ping进行判断，如果连接已经断开，会自动重连。 
+ 6 mysql_ping(&mysql);
+ 7 //ping()这个函数先检测数据连接是否正常，如果被关闭，整个把当前脚本的MYSQL实例关闭，再重新连接。 
+ 8 //经过这样处理后，可以非常有效的解决MySQL server has gone away这样的问题，而且不会对系统造成额外的开销。 
+ 9 //mysql_ping会改变mysql_affected_rows的返回值。所以最好是给该MYSQL句柄再加一个mutex（最好是读写锁）。当其它线程准备执行query的时候，就获取锁，执行完就释放。而这个执行mysql_ping的线程在执行ping之间先尝试获取锁，如果获取失败，
+10 //则继续sleep，放弃这一轮的ping。</pre>
+
+<p><a href="javascript:void(0);" title="复制代码"><img src="https://upload-images.jianshu.io/upload_images/10868025-1b5e99f9b92fd0c2.gif?imageMogr2/auto-orient/strip" alt="复制代码"></a> </p>
+<p>附录：</p>
+<p>*<em>mysqli_options() *</em></p>
+<p><strong>定义和语法</strong></p>
+<p>mysqli_options() 函数设置额外的连接选项，用于影响连接行为。</p>
+<p>mysqli_options() 函数可以被调用若干次来设置若干个选项。</p>
+<p><strong>注释：</strong>mysqli_options() 函数可以在 mysqli_init() 之后和 mysqli_real_connect() 之前被调用。</p>
+<p><strong>语法：</strong></p>
+<pre>1 mysqli_options(connection,option,value);</pre>
+
+<p>connection：必需。规定要使用的 MySQL 连接。</p>
+<p>option:必需。规定要设置的选项。可以是下列值中的一个：</p>
+<ul>
+<li>MYSQLI_OPT_CONNECT_TIMEOUT - 以秒为单位的连接超时时间</li>
+<li>MYSQLI_OPT_LOCAL_INFILE - 启用/禁用 LOAD LOCAL INFILE</li>
+<li>MYSQLI_INIT_COMMAND - 在连接到 MySQL 服务器之后的执行命令</li>
+<li>MYSQLI_READ_DEFAULT_FILE - 从已命名的文件而不是 my.cnf 中读取选项</li>
+<li>MYSQLI_READ_DEFAULT_GROUP - 从 my.cnf 或者 MYSQLI_READ_DEFAULT_FILE 中指定的文件中的已命名组中读取选项</li>
+<li>MYSQLI_SERVER_PUBLIC_KEY - 基于 SHA-256 认证的 RSA 公共密钥文件</li>
+</ul>
+<p>value:必需。规定 <em>option</em> 的值。</p>
+<p><strong>mysql_ping()</strong></p>
+<p>mysql_ping指：本函数可用于空闲很久的脚本来检查服务器是否关闭了连接。</p>
+<p><strong>定义和语法</strong></p>
+<p>nt STDCALL mysql_ping(MYSQL *mysql);</p>
+<p>描述：</p>
+<p>检查与服务端的连接是否正常。连接断开时，如果自动重新连接功能未被禁用，则尝试重新连接服务器。该函数可被客户端用来检测闲置许久以后，与服务端的连接是否关闭，如有需要，则重新连接。</p>
+<p>返回值：<br>　　连接正常，返回0；如有错误发生，则返回非0值。返回非0值并不意味着服务器本身关闭掉，也有可能是网络原因导致网络不通。</p>
+<p>错误码：<br>CR_COMMANDS_OUT_OF_SYNC 命令以不正确的顺序执行</p>
+<p>CR_SERVER_GONE_ERROR 服务器连接断开</p>
+<p><strong>。。。</strong></p>
+<p><strong>语法</strong></p>
+<p>mysql_ping(connection)</p>
+<p>connection：可选。规定 MySQL 连接。如果未规定，则使用上一个连接。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/test-1/" itemprop="url">mysql物理还原方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:29:37+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先，介绍一下mysql的数据库文件。</p>
+<p><strong>.frm文件</strong>：保存了每个表的元数据，包括表结构的定义等，该文件与数据库引擎无关。</p>
+<p><strong>.ibd文件</strong>：InnoDB引擎开启了独立表空间(my.ini中配置innodb_file_per_table = 1)产生的存放该表的数据和索引的文件。</p>
+<p>当innodb_file_per_table = 0使用共享表空间，所有数据库的表和索引数据存储在ibdata文件里。</p>
+<ol>
+<li>备份损坏数据表的.ibd文件</li>
+<li>删除表结构</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE tb_xxx;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>重新创建表结构</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tb_xxx ....</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>以下命令会删除新表的.ibd文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tb_xxx DISCARD TABLESPACE;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>拷贝备份的.ibd文件到数据文件夹</li>
+<li>导入数据文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tb_xxx IMPORT TABLESPACE;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -654,6 +2203,10 @@ public static class ThreadPollProxy{
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
+
 
 
           </div>
@@ -697,7 +2250,7 @@ public static class ThreadPollProxy{
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
