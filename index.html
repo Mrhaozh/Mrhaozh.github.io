@@ -229,6 +229,127 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mr.Hao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/27/%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8/" itemprop="url">一个拦截器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T15:30:08+08:00">
+                2020-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ApiInterceptor implements HandlerInterceptor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        String APPTOKEN &#x3D; request.getHeader(&quot;APPTOKEN&quot;);</span><br><span class="line">        if(StringUtils.isBlank(APPTOKEN))&#123;</span><br><span class="line">            request.setAttribute(&quot;code&quot;,&quot;-1&quot;);</span><br><span class="line">            request.setAttribute(&quot;msg&quot;,&quot;请求token为空&quot;);</span><br><span class="line">            request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            HttpSession session&#x3D;request.getSession();</span><br><span class="line">            if(null&#x3D;&#x3D;session.getAttribute(&quot;APPTOKEN&quot;)||session.getAttribute(&quot;APPTOKEN&quot;).toString().isEmpty())&#123;</span><br><span class="line">                request.setAttribute(&quot;code&quot;,&quot;-2&quot;);</span><br><span class="line">                request.setAttribute(&quot;msg&quot;,&quot;session过期请重新获取验证&quot;);</span><br><span class="line">                request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">                return false;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(APPTOKEN.equals(session.getAttribute(&quot;APPTOKEN&quot;).toString())) &#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    request.setAttribute(&quot;code&quot;,&quot;-3&quot;);</span><br><span class="line">                    request.setAttribute(&quot;msg&quot;,&quot;token值无效&quot;);</span><br><span class="line">                    request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebMvcConfig implements WebMvcConfigurer &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ApiInterceptor apiInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        &#x2F;&#x2F;registry.addInterceptor(apiInterceptor).addPathPatterns(&quot;&#x2F;api&#x2F;**&quot;).excludePathPatterns(&quot;&#x2F;api&#x2F;laissezpasser&quot;,&quot;&#x2F;api&#x2F;prohibit&quot;,&quot;&#x2F;api&#x2F;test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addResourceHandler(&quot;&#x2F;statics&#x2F;**&quot;).addResourceLocations(&quot;classpath:&#x2F;statics&#x2F;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/Spring%E6%95%B4%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%9A-idea-SpringBoot-Mybatis-Thymeleaf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2057,149 +2178,6 @@ showcreatetabletickets;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/test-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mr.Hao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/27/test-1/" itemprop="url">mysql物理还原方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:29:37+08:00">
-                2020-07-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先，介绍一下mysql的数据库文件。</p>
-<p><strong>.frm文件</strong>：保存了每个表的元数据，包括表结构的定义等，该文件与数据库引擎无关。</p>
-<p><strong>.ibd文件</strong>：InnoDB引擎开启了独立表空间(my.ini中配置innodb_file_per_table = 1)产生的存放该表的数据和索引的文件。</p>
-<p>当innodb_file_per_table = 0使用共享表空间，所有数据库的表和索引数据存储在ibdata文件里。</p>
-<ol>
-<li>备份损坏数据表的.ibd文件</li>
-<li>删除表结构</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE tb_xxx;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>重新创建表结构</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE tb_xxx ....</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>以下命令会删除新表的.ibd文件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tb_xxx DISCARD TABLESPACE;</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>拷贝备份的.ibd文件到数据文件夹</li>
-<li>导入数据文件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE tb_xxx IMPORT TABLESPACE;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2250,7 +2228,7 @@ showcreatetabletickets;
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

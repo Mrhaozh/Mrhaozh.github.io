@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="给主机为localhost的用户normal分配可对数据库test的所有表进行所有操作的权限，并设定口令为123。 mysql&gt;grant all privileges on test.* to joe@192.168.10.1 identified by &amp;apos;123&amp;apos;;  说明：给主机为192.168.10.1的用户john分配可对数据库test所有表进行所有操作的权限，">
+<meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940@Componentpublic class ApiInterceptor implements HandlerInterceptor &amp;#123;    @Override    public boolean preHandle(HttpServletRe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql分配用户">
-<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%88%86%E9%85%8D%E7%94%A8%E6%88%B7/index.html">
+<meta property="og:title" content="一个拦截器">
+<meta property="og:url" content="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8/index.html">
 <meta property="og:site_name" content="Blog">
-<meta property="og:description" content="给主机为localhost的用户normal分配可对数据库test的所有表进行所有操作的权限，并设定口令为123。 mysql&gt;grant all privileges on test.* to joe@192.168.10.1 identified by &amp;apos;123&amp;apos;;  说明：给主机为192.168.10.1的用户john分配可对数据库test所有表进行所有操作的权限，">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940@Componentpublic class ApiInterceptor implements HandlerInterceptor &amp;#123;    @Override    public boolean preHandle(HttpServletRe">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-27T02:56:35.000Z">
-<meta property="article:modified_time" content="2020-07-27T02:56:45.493Z">
+<meta property="article:published_time" content="2020-07-27T07:30:08.000Z">
+<meta property="article:modified_time" content="2020-07-27T07:31:07.847Z">
 <meta property="article:author" content="Mr.Hao">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql分配用户/"/>
+  <link rel="canonical" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/一个拦截器/"/>
 
 
 
 
 
-  <title>mysql分配用户 | Blog</title>
+  <title>一个拦截器 | Blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/mysql%E5%88%86%E9%85%8D%E7%94%A8%E6%88%B7/">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Mrhaozh/Mrhaozh.github.io.git/2020/07/27/%E4%B8%80%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Hao">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql分配用户</h1>
+          <h1 class="post-title" itemprop="name headline">一个拦截器</h1>
         
 
         <div class="post-meta">
@@ -261,7 +261,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T10:56:35+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-27T15:30:08+08:00">
                 2020-07-27
               </time>
             
@@ -299,34 +299,9 @@
       
 
       
-        <p>给主机为localhost的用户normal分配可对数据库test的所有表进行所有操作的权限，并设定口令为123。</p>
-<pre><code>mysql&gt;grant all privileges on test.* to joe@192.168.10.1 identified by &apos;123&apos;;
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ApiInterceptor implements HandlerInterceptor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        String APPTOKEN &#x3D; request.getHeader(&quot;APPTOKEN&quot;);</span><br><span class="line">        if(StringUtils.isBlank(APPTOKEN))&#123;</span><br><span class="line">            request.setAttribute(&quot;code&quot;,&quot;-1&quot;);</span><br><span class="line">            request.setAttribute(&quot;msg&quot;,&quot;请求token为空&quot;);</span><br><span class="line">            request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            HttpSession session&#x3D;request.getSession();</span><br><span class="line">            if(null&#x3D;&#x3D;session.getAttribute(&quot;APPTOKEN&quot;)||session.getAttribute(&quot;APPTOKEN&quot;).toString().isEmpty())&#123;</span><br><span class="line">                request.setAttribute(&quot;code&quot;,&quot;-2&quot;);</span><br><span class="line">                request.setAttribute(&quot;msg&quot;,&quot;session过期请重新获取验证&quot;);</span><br><span class="line">                request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">                return false;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(APPTOKEN.equals(session.getAttribute(&quot;APPTOKEN&quot;).toString())) &#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    request.setAttribute(&quot;code&quot;,&quot;-3&quot;);</span><br><span class="line">                    request.setAttribute(&quot;msg&quot;,&quot;token值无效&quot;);</span><br><span class="line">                    request.getRequestDispatcher(request.getContextPath()+&quot;&#x2F;api&#x2F;prohibit&quot;).forward(request,response);</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-说明：给主机为192.168.10.1的用户john分配可对数据库test所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to john@192.168.10.1 identified by &apos;123&apos;;
-
-说明：给主机为192.168.10.1的用户john分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-
-mysql&gt;grant all privileges on *.* to john@localhost identified by &apos;123&apos;;
-
-说明：用户john分配可对所有数据库的所有表进行所有操作的权限，并设定口令为123。
-
-查看权限：
-
-show grants for你的用户;
-
-show grants forroot@&apos;localhost&apos;;
-
-show grants for webgametest@10.3.18.158;
-
-show createdatabase dbname; 
-
-这个可以看到创建数据库时用到的一些参数。
-
-showcreatetabletickets;   
-
-可以看到创建表时用到的一些参数</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebMvcConfig implements WebMvcConfigurer &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private ApiInterceptor apiInterceptor;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        &#x2F;&#x2F;registry.addInterceptor(apiInterceptor).addPathPatterns(&quot;&#x2F;api&#x2F;**&quot;).excludePathPatterns(&quot;&#x2F;api&#x2F;laissezpasser&quot;,&quot;&#x2F;api&#x2F;prohibit&quot;,&quot;&#x2F;api&#x2F;test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addResourceHandler(&quot;&#x2F;statics&#x2F;**&quot;).addResourceLocations(&quot;classpath:&#x2F;statics&#x2F;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -350,8 +325,8 @@ showcreatetabletickets;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/27/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="MySQL 数据库常用命令">
-                <i class="fa fa-chevron-left"></i> MySQL 数据库常用命令
+              <a href="/2020/07/27/Spring%E6%95%B4%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%9A-idea-SpringBoot-Mybatis-Thymeleaf/" rel="next" title=" Spring整合系列： idea SpringBoot+Mybatis+Thymeleaf">
+                <i class="fa fa-chevron-left"></i>  Spring整合系列： idea SpringBoot+Mybatis+Thymeleaf
               </a>
             
           </div>
@@ -359,10 +334,6 @@ showcreatetabletickets;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/27/Spring%E6%95%B4%E5%90%88%E7%B3%BB%E5%88%97%EF%BC%9A-idea-SpringBoot-Mybatis-Thymeleaf/" rel="prev" title=" Spring整合系列： idea SpringBoot+Mybatis+Thymeleaf">
-                 Spring整合系列： idea SpringBoot+Mybatis+Thymeleaf <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
